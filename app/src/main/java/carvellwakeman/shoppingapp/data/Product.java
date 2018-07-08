@@ -6,6 +6,11 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 
+/*
+ * This entity is a java class used by Room to build the product table.
+ * It is also used in viewModel logic to serve as a data contract to be displayed on the front end.
+ * If this application used data-binding, this class could act as a contract for that as well.
+ */
 @Entity
 public class Product {
 
@@ -20,7 +25,8 @@ public class Product {
     private Float width;
     private Float height;
 
-    public Product(String id, String name, String description, Integer quantity, Float weight, Float length, Float width, Float height) {
+
+    public Product(@NonNull String id, String name, String description, Integer quantity, Float weight, Float length, Float width, Float height) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,11 +37,12 @@ public class Product {
         this.height = height;
     }
 
-    public String getId() {
+
+    @NonNull public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
