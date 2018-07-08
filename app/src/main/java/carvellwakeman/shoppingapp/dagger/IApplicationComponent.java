@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 
 @Singleton
-@Component(modules = {RoomModule.class})
+@Component(modules = {RoomModule.class, ViewModelModule.class})
 public interface IApplicationComponent {
 
     void inject(ListFragment listFragment);

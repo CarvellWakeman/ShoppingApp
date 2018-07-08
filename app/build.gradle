@@ -35,6 +35,10 @@ dependencies {
     implementation "com.google.dagger:dagger:2.16"
     annotationProcessor "com.google.dagger:dagger-compiler:2.16"
 
+    // Butter Knife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     // Android Architecture Components
     implementation "android.arch.lifecycle:runtime:1.1.1"
     implementation "android.arch.lifecycle:extensions:1.1.1"
