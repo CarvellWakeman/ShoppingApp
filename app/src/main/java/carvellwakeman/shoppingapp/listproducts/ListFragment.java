@@ -1,7 +1,6 @@
 package carvellwakeman.shoppingapp.listproducts;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -48,15 +47,15 @@ public class ListFragment extends BaseFragment<ListViewModel> {
         ButterKnife.bind(this, view);
 
 
-        textView.setText(String.valueOf(viewModel.getCount()));
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewModel.incCount();
-                textView.setText(String.valueOf(viewModel.getCount()));
+        viewModel.getProduct("a").observe(this, product -> {
+            if (product != null) {
+                textView.setText(String.valueOf(product.getQuantity()));
             }
         });
+
+        button.setOnClickListener((View v) ->
+            viewModel.addProduct()
+        );
 
 
         // Inflate the layout for this fragment

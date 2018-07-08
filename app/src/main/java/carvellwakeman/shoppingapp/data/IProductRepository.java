@@ -10,8 +10,8 @@ public interface IProductRepository {
 
     LiveData<Product> getProduct(String productId);
 
-    Long createProduct(Product product);
+    void createProduct(Product product);
 
-    int deleteProduct(Product product);
+    void deleteProduct(Product product);
 
 }

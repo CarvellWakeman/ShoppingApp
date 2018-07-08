@@ -24,10 +24,10 @@ public interface IProductDao {
 
     // Insert/Replace Item
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insertProduct(Product product);
+    void insertProduct(Product product);
 
     // Delete Item
     @Delete
-    int deleteProduct(Product product);
+    void deleteProduct(Product product);
 
 }
