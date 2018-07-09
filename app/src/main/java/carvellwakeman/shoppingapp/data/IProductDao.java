@@ -20,7 +20,7 @@ public interface IProductDao {
 
     // Get Item
     @Query("SELECT * FROM Product WHERE id = :productId")
-    LiveData<Product> getProduct(String productId);
+    LiveData<Product> getProduct(int productId);
 
     // Insert/Replace Item
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,6 +28,10 @@ public interface IProductDao {
 
     // Delete Item
     @Query("DELETE FROM Product WHERE id = :productId")
-    void deleteProduct(String productId);
+    void deleteProduct(int productId);
+
+    // Count items
+    @Query("SELECT COUNT(*) FROM Product")
+    int countProducts();
 
 }

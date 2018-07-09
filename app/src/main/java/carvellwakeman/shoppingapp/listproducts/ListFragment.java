@@ -4,29 +4,36 @@ package carvellwakeman.shoppingapp.listproducts;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
-import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
 import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.data.Product;
-import carvellwakeman.shoppingapp.databinding.ItemProductBinding;
+import carvellwakeman.shoppingapp.utils.DiffUtilCallback;
+import carvellwakeman.shoppingapp.utils.SwipeDeleteCallback;
 import carvellwakeman.shoppingapp.view.BaseFragment;
+import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
+
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
-    //@BindView(R.id.rec_products) RecyclerView recyclerView;
-    @BindView(R.id.layout_product) FrameLayout productLayout;
-    //@BindView(R.id.button) Button button;
-    //@BindView(R.id.button2) Button button2;
+    //@BindView(R.id.layout_product) FrameLayout productLayout;
+    @BindView(R.id.rec_products) RecyclerView recyclerView;
+    @BindView(R.id.button) Button button;
 
 
     // Required empty public constructor
@@ -49,30 +56,38 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.createViewModel();
 
-        //View view = inflater.inflate(R.layout.fragment_list, container, false);
-
-        ItemProductBinding binding = DataBindingUtil.inflate(inflater, R.layout.item_product, container, false);
-        binding.setProduct(new Product("A", "B", "C", 4, 1.0f, 1.0f, 1.0f, 1.0f));
-
-        View view = binding.getRoot();
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
 
-        //ListFragmentBinding binding = setContentView(inflater, R.layout.fragment_list, container, false);
-        //binding.setVariable(BR.product, new Product("A", "B", "C", 4, 1.0f, 1.0f, 1.0f, 1.0f));
+        // RecyclerView boilerplate
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //viewModel.getProduct("a").observe(this, product -> {
-        //    if (product != null) {
-        //        textView.setText(String.valueOf(product.getQuantity()));
-        //    }
-        //});
+        // Subscribe recyclerview adapter to viewModel LiveData
+        viewModel.getProducts().observe(this, products -> {
+            if (recyclerView.getAdapter() == null) {
+                recyclerView.setAdapter(new CustomBaseAdapter(products, R.layout.item_product));
+            }
+            else {
+                ((CustomBaseAdapter<Product>)recyclerView.getAdapter()).updateElements(products);
+            }
+        });
 
-//        button.setOnClickListener((View v) ->
-//            viewModel.addProduct(new Product("a", "B", "C", 4, 1.0f, 1.0f, 1.0f, 1.0f))
-//        );
-//
-//        button2.setOnClickListener((View v) ->
-//                viewModel.removeProduct("a")
-//        );
+        // Recyclerview Swipe to delete
+        SwipeDeleteCallback sdcb = new SwipeDeleteCallback(getActivity(), ItemTouchHelper.LEFT) {
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                viewModel.removeProduct(viewHolder.getAdapterPosition());
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(sdcb);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
+
+        // (TEMP) Add new product button
+        button.setOnClickListener((View v) ->
+            viewModel.addProduct(new Product(Calendar.getInstance().getTime().toString(), "C", 4, 1.0f, 1.0f, 1.0f, 1.0f))
+        );
 
 
         // Inflate the layout for this fragment

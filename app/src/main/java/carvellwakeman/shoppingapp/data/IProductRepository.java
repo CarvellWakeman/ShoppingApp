@@ -8,10 +8,10 @@ public interface IProductRepository {
 
     LiveData<List<Product>> getProducts();
 
-    LiveData<Product> getProduct(String productId);
+    LiveData<Product> getProduct(int productId);
 
     void createProduct(Product product);
 
-    void deleteProduct(String productId);
+    void deleteProduct(int productId);
 
 }

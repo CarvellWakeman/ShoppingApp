@@ -2,6 +2,7 @@ package carvellwakeman.shoppingapp.data;
 
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
 import javax.inject.Inject;
@@ -31,7 +32,7 @@ public class ProductRepository implements IProductRepository {
 
     // Get Item
     @Override
-    public LiveData<Product> getProduct(String productId) {
+    public LiveData<Product> getProduct(int productId) {
         return productDao.getProduct(productId);
     }
 
@@ -43,7 +44,7 @@ public class ProductRepository implements IProductRepository {
 
     // Delete Item
     @Override
-    public void deleteProduct(String productId) {
+    public void deleteProduct(int productId) {
         AsyncTask.execute(() -> productDao.deleteProduct(productId));
     }
 

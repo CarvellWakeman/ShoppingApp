@@ -15,9 +15,9 @@ import android.support.annotation.NonNull;
 @Entity
 public class Product {
 
-    @PrimaryKey
     @NonNull
-    private String id;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String name;
     private String description;
     private Integer quantity;
@@ -27,8 +27,7 @@ public class Product {
     private Float height;
 
 
-    public Product(@NonNull String id, String name, String description, Integer quantity, Float weight, Float length, Float width, Float height) {
-        this.id = id;
+    public Product(String name, String description, Integer quantity, Float weight, Float length, Float width, Float height) {
         this.name = name;
         this.description = description;
         this.quantity = quantity;
@@ -39,11 +38,11 @@ public class Product {
     }
 
 
-    @NonNull public String getId() {
+    @NonNull public int getId() {
         return id;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(@NonNull int id) {
         this.id = id;
     }
 
@@ -101,5 +100,11 @@ public class Product {
 
     public void setHeight(Float height) {
         this.height = height;
+    }
+
+
+    @Override
+    public boolean equals(Object product) {
+        return (product instanceof Product) && this.id == ((Product)product).id;
     }
 }

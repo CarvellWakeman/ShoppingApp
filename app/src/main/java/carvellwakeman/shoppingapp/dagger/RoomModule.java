@@ -21,6 +21,8 @@ public class RoomModule {
 
     public RoomModule(Application application) {
         this.database = Room.databaseBuilder(application, ShoppingDatabase.class, DB_NAME)
+                //.allowMainThreadQueries() // TODO: WARNING - DEBUGGING ONLY
+                .fallbackToDestructiveMigration()
                 .build();
     }
 

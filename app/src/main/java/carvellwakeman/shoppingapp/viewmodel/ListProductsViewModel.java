@@ -8,28 +8,31 @@ import carvellwakeman.shoppingapp.data.IProductRepository;
 import carvellwakeman.shoppingapp.data.Product;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 public class ListProductsViewModel extends ViewModel {
 
     private final IProductRepository repository;
-    private MutableLiveData<Integer> count;
 
     @Inject
     public ListProductsViewModel(IProductRepository repository) {
         this.repository = repository;
-        this.count = new MutableLiveData<>();
-        this.count.setValue(0);
     }
 
-    public LiveData<Product> getProductA() { return repository.getProduct("a"); }
-    public LiveData<Product> getProduct(String productId) { return repository.getProduct(productId); }
+    public LiveData<List<Product>> getProducts() {
+        return repository.getProducts();
+    }
+
+    public LiveData<Product> getProduct(int productId) {
+        return repository.getProduct(productId);
+    }
 
     public void addProduct(Product product) {
-        repository.createProduct(new Product("a", "ProductName", "Product Description", 2, 1.0f, 1.0f, 1.0f, 1.0f));
+        repository.createProduct(product);
     }
 
-    public void removeProduct(String productId) {
+    public void removeProduct(int productId) {
         repository.deleteProduct(productId);
     }
 
