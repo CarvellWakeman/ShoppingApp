@@ -13,24 +13,28 @@ import android.support.annotation.NonNull;
  * If this application used data-binding, this class could act as a contract for that as well.
  */
 @Entity
-public class Product {
+public class Product implements IBaseEntity{
 
-    @NonNull
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private String description;
+    private String imageUrl;
     private Integer quantity;
+    private Double cost;
     private Float weight;
     private Float length;
     private Float width;
     private Float height;
 
 
-    public Product(String name, String description, Integer quantity, Float weight, Float length, Float width, Float height) {
+    public Product(String name, String description, String imageUrl, Integer quantity, Double cost, Float weight, Float length, Float width, Float height) {
         this.name = name;
         this.description = description;
+        this.imageUrl = imageUrl;
+
         this.quantity = quantity;
+        this.cost = cost;
         this.weight = weight;
         this.length = length;
         this.width = width;
@@ -38,11 +42,11 @@ public class Product {
     }
 
 
-    @NonNull public int getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(@NonNull int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,12 +66,28 @@ public class Product {
         this.description = description;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
     public Float getWeight() {

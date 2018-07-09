@@ -25,27 +25,24 @@ public class ProductRepository implements IProductRepository {
     }
 
     // Get Items
-    @Override
     public LiveData<List<Product>> getProducts() {
         return productDao.getProducts();
     }
 
     // Get Item
-    @Override
     public LiveData<Product> getProduct(int productId) {
         return productDao.getProduct(productId);
     }
 
     // Insert Item
-    @Override
     public void createProduct(Product product) {
         AsyncTask.execute(() -> productDao.insertProduct(product));
     }
 
     // Delete Item
-    @Override
     public void deleteProduct(int productId) {
         AsyncTask.execute(() -> productDao.deleteProduct(productId));
     }
 
+    public int countProducts() { return productDao.countProducts(); }
 }

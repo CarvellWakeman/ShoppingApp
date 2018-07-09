@@ -1,22 +1,20 @@
 package carvellwakeman.shoppingapp.view;
 
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import carvellwakeman.shoppingapp.data.IBaseEntity;
 import carvellwakeman.shoppingapp.utils.DiffUtilCallback;
 
 import java.util.List;
 
 
-public class CustomBaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
+public abstract class CustomBaseAdapter<T extends IBaseEntity, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
 
-    private int layout;
-    private final List<T> elements;
+    protected int layout;
+    protected final List<T> elements;
 
     public CustomBaseAdapter(List<T> elements, int layout) {
         this.elements = elements;
@@ -25,22 +23,21 @@ public class CustomBaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>
 
     @NonNull
     @Override
-    public BaseViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-
-        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, layout, parent, false);
-        return new BaseViewHolder<>(binding);
-    }
+    public abstract VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        T object = elements.get(position);
-        holder.bind(object);
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.bind(elements.get(position));
     }
 
     @Override
     public int getItemCount() {
         return elements.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return elements.get(position).getId();
     }
 
     public void updateElements(List<T> newList) {

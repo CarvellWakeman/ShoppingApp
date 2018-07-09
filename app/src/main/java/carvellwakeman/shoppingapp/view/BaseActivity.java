@@ -17,12 +17,12 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        replaceFragment(R.id.activity_list_base, ListFragment.class.getName());
+        replaceFragment(R.id.activity_list_base, ListFragment.class.getName(), "ListProducts");
     }
 
-    public void replaceFragment(int containerViewId, String fragClass) {
+    public void replaceFragment(int containerViewId, String fragClass, String name) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(fragClass);
+        Fragment fragment = fragmentManager.findFragmentByTag(fragClass + name);
 
         if (fragment == null) {
             try {
@@ -33,8 +33,8 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(containerViewId, fragment, fragClass);
-        transaction.addToBackStack(fragClass);
+        transaction.replace(containerViewId, fragment, fragClass + name);
+        transaction.addToBackStack(fragClass + name);
         transaction.commit();
     }
 

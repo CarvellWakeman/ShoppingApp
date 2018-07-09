@@ -1,7 +1,6 @@
 package carvellwakeman.shoppingapp.data;
 
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
@@ -12,7 +11,7 @@ import android.support.annotation.NonNull;
  * This is an extension of a Room database object.
  * It specifies the tables (entities) which will be created in the database.
  */
-@Database(entities = {Product.class}, exportSchema = false, version = 2)
+@Database(entities = {Product.class}, exportSchema = false, version = 3)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
     public abstract IProductDao productDao();

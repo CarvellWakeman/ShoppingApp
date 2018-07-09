@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Shopping App</string>
 
+    <string name="format_num_available">%n Available</string>
+    <string name="format_currency">%.2f %s</string>
+    <string name="format_length_width_height">%.2f (L) X %.2f (W) X %.2f (H)</string>
+    <string name="format_weight">%.2f Kg</string>
 </resources>

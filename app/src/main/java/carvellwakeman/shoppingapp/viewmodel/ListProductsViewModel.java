@@ -36,4 +36,8 @@ public class ListProductsViewModel extends ViewModel {
         repository.deleteProduct(productId);
     }
 
+    public int countProducts() {
+        return repository.countProducts();
+    }
+
 }

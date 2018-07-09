@@ -1,10 +1,10 @@
 package carvellwakeman.shoppingapp.listproducts;
 
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -18,20 +18,16 @@ import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
 import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.data.Product;
-import carvellwakeman.shoppingapp.utils.DiffUtilCallback;
 import carvellwakeman.shoppingapp.utils.SwipeDeleteCallback;
 import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
-    //@BindView(R.id.layout_product) FrameLayout productLayout;
     @BindView(R.id.rec_products) RecyclerView recyclerView;
     @BindView(R.id.button) Button button;
 
@@ -61,14 +57,16 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
         // RecyclerView boilerplate
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         // Subscribe recyclerview adapter to viewModel LiveData
         viewModel.getProducts().observe(this, products -> {
             if (recyclerView.getAdapter() == null) {
-                recyclerView.setAdapter(new CustomBaseAdapter(products, R.layout.item_product));
+                recyclerView.setAdapter(new ProductAdapter(products, R.layout.item_product));
             }
             else {
-                ((CustomBaseAdapter<Product>)recyclerView.getAdapter()).updateElements(products);
+                ((ProductAdapter)recyclerView.getAdapter()).updateElements(products);
             }
         });
 
@@ -76,7 +74,11 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         SwipeDeleteCallback sdcb = new SwipeDeleteCallback(getActivity(), ItemTouchHelper.LEFT) {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                viewModel.removeProduct(viewHolder.getAdapterPosition());
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                if (adapter instanceof CustomBaseAdapter) {
+                    CustomBaseAdapter customAdapter = (CustomBaseAdapter)adapter;
+                    viewModel.removeProduct((int)customAdapter.getItemId(viewHolder.getAdapterPosition()));
+                }
             }
         };
 
@@ -86,7 +88,15 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
         // (TEMP) Add new product button
         button.setOnClickListener((View v) ->
-            viewModel.addProduct(new Product(Calendar.getInstance().getTime().toString(), "C", 4, 1.0f, 1.0f, 1.0f, 1.0f))
+            viewModel.addProduct(new Product(
+                    "EKEDALEN Chair",
+                    "The upholstered seat and curved backrest make you want to stay seated at the table for a while. Choose between different covers and machine wash when needed – and why not have several at home for variety?",
+                    "https://www.ikea.com/us/en/images/products/ekedalen-chair-brown__0516603_PE640439_S4.JPG",
+                    85,
+                    49.0d,
+                    6.7f,
+                    41.0f, 43.0f, 46.0f)
+            )
         );
 
 
