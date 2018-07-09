@@ -3,6 +3,7 @@ package carvellwakeman.shoppingapp.data;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.Bindable;
 import android.support.annotation.NonNull;
 
 

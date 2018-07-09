@@ -12,6 +12,6 @@ public interface IProductRepository {
 
     void createProduct(Product product);
 
-    void deleteProduct(Product product);
+    void deleteProduct(String productId);
 
 }

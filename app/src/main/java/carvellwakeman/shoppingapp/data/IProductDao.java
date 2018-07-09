@@ -27,7 +27,7 @@ public interface IProductDao {
     void insertProduct(Product product);
 
     // Delete Item
-    @Delete
-    void deleteProduct(Product product);
+    @Query("DELETE FROM Product WHERE id = :productId")
+    void deleteProduct(String productId);
 
 }

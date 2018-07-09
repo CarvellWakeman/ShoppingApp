@@ -23,8 +23,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass.isAssignableFrom(ListViewModel.class)) {
-            return (T) new ListViewModel(repository);
+        if (modelClass.isAssignableFrom(ListProductsViewModel.class)) {
+            return (T) new ListProductsViewModel(repository);
         }
         else {
             throw new IllegalArgumentException("ViewModel Class Not Found");

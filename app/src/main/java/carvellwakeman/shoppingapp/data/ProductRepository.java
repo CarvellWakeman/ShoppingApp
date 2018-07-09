@@ -43,8 +43,8 @@ public class ProductRepository implements IProductRepository {
 
     // Delete Item
     @Override
-    public void deleteProduct(Product product) {
-        AsyncTask.execute(() -> productDao.deleteProduct(product));
+    public void deleteProduct(String productId) {
+        AsyncTask.execute(() -> productDao.deleteProduct(productId));
     }
 
 }

@@ -10,23 +10,27 @@ import carvellwakeman.shoppingapp.data.Product;
 import javax.inject.Inject;
 
 
-public class ListViewModel extends ViewModel {
+public class ListProductsViewModel extends ViewModel {
 
     private final IProductRepository repository;
     private MutableLiveData<Integer> count;
 
     @Inject
-    public ListViewModel(IProductRepository repository) {
+    public ListProductsViewModel(IProductRepository repository) {
         this.repository = repository;
         this.count = new MutableLiveData<>();
         this.count.setValue(0);
     }
 
-
+    public LiveData<Product> getProductA() { return repository.getProduct("a"); }
     public LiveData<Product> getProduct(String productId) { return repository.getProduct(productId); }
 
-    public void addProduct() {
+    public void addProduct(Product product) {
         repository.createProduct(new Product("a", "ProductName", "Product Description", 2, 1.0f, 1.0f, 1.0f, 1.0f));
+    }
+
+    public void removeProduct(String productId) {
+        repository.deleteProduct(productId);
     }
 
 }
