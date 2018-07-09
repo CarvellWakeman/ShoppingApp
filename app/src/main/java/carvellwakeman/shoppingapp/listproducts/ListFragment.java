@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
 
-import java.util.Calendar;
+import java.util.*;
 
 
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
@@ -85,18 +86,55 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(sdcb);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-
+        class SimpleProduct {
+            String name;
+            String desc;
+            String url;
+            public SimpleProduct(String name, String url, String desc) { this.name = name; this.desc = desc; this.url = url; }
+        }
         // (TEMP) Add new product button
-        button.setOnClickListener((View v) ->
-            viewModel.addProduct(new Product(
-                    "EKEDALEN Chair",
-                    "The upholstered seat and curved backrest make you want to stay seated at the table for a while. Choose between different covers and machine wash when needed – and why not have several at home for variety?",
-                    "https://www.ikea.com/us/en/images/products/ekedalen-chair-brown__0516603_PE640439_S4.JPG",
-                    85,
-                    49.0d,
-                    6.7f,
-                    41.0f, 43.0f, 46.0f)
-            )
+        Random random = new Random();
+        List<SimpleProduct> products = new ArrayList<>();
+        products.add(
+            new SimpleProduct("EKEDALEN Chair",
+                      "https://www.ikea.com/us/en/images/products/ekedalen-chair-brown__0516603_PE640439_S4.JPG",
+                      "The upholstered seat and curved backrest make you want to stay seated at the table for a while. Choose between different covers and machine wash when needed – and why not have several at home for variety?")
+        );
+        products.add(
+                new SimpleProduct("KULLABERG Chair",
+                        "https://www.ikea.com/us/en/images/products/kullaberg-swivel-chair-black__0410020_PE577748_S4.JPG",
+                        "A desk chair inspired by old-fashioned industrial-style chairs, complete with modern functions.")
+        );
+        products.add(
+                new SimpleProduct("STEFAN Chair",
+                        "https://www.ikea.com/us/en/images/products/stefan-chair-black__0122106_PE278491_S4.JPG",
+                        "Solid wood is a durable natural material.")
+        );
+        products.add(
+                new SimpleProduct("VIVO Dual LCD LED Monitor Desk Mount Stand",
+                        "https://images-na.ssl-images-amazon.com/images/I/81O%2Bbh3YQRL._SL1500_.jpg",
+                        "Heavy Duty Fully Adjustable fits 2/Two Screens up to 27\"")
+        );
+        products.add(
+                new SimpleProduct("1994 Honda Accord",
+                        "http://i.bnet.com/blogs/94_honda_accord.jpg",
+                        "A very old and unreliable car. Comes with new brakepads on the front, and the left rear tail light is out.")
+        );
+
+
+        button.setOnClickListener((View v) -> {
+                int idx = random.nextInt(products.size());
+                SimpleProduct p = products.get(idx);
+                viewModel.addProduct(new Product(p.name, p.desc, p.url,
+                        random.nextInt(100),
+                        random.nextDouble() * 300.0d,
+                        random.nextFloat() * 10.0f,
+                        random.nextFloat() * 50.0f,
+                        random.nextFloat() * 50.0f,
+                        random.nextFloat() * 50.0f));
+
+                recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount());
+            }
         );
 
 

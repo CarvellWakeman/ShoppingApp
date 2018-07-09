@@ -24,23 +24,11 @@
             android:layout_height="18dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@{String.valueOf(item.id)}"
+            android:text="@{@string/format_id(item.id)}"
             android:textAppearance="@style/Text.Secondary.Italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Id" />
-
-        <TextView
-            android:id="@+id/textView_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{item.name}"
-            android:textAppearance="@style/Text"
-            app:layout_constraintStart_toEndOf="@+id/imageView_image"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Name" />
 
         <TextView
             android:id="@+id/textView_description"
@@ -49,6 +37,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:maxLines="3"
             android:text="@{item.description}"
             android:textAppearance="@style/Text.Secondary"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,11 +50,13 @@
             android:id="@+id/imageView_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:contentDescription="@{item.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@{item.name}"
             tools:text="Image" />
 
         <TextView
@@ -83,42 +74,26 @@
         <TextView
             android:id="@+id/textView_cost"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_height="31dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
             android:text="@{carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, item.cost)}"
-            android:textAppearance="@style/Text.Secondary"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_name"
+            android:textAppearance="@style/Text.Currency"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="Cost" />
 
         <TextView
-            android:id="@+id/textView_weight"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView_name"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{@string/format_weight(item.weight)}"
-            android:textAppearance="@style/Text.Secondary.Italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView_lengthWidthHeight"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_image"
-            tools:text="Weight" />
-
-        <TextView
-            android:id="@+id/textView_lengthWidthHeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{@string/format_length_width_height(item.length, item.width, item.height)}"
-            android:textAppearance="@style/Text.Secondary.Italic"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_image"
-            tools:text="Length X Width X Height" />
+            android:text="@{item.name}"
+            android:textAppearance="@style/Text"
+            app:layout_constraintEnd_toStartOf="@+id/textView_cost"
+            app:layout_constraintStart_toEndOf="@+id/imageView_image"
+            app:layout_constraintTop_toTopOf="@+id/imageView_image"
+            tools:text="Name" />
 
     </android.support.constraint.ConstraintLayout>
 
