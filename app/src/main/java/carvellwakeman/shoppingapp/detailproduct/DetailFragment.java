@@ -5,17 +5,17 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.Toolbar;
 import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.BR;
 import carvellwakeman.shoppingapp.R;
 import carvellwakeman.shoppingapp.ShoppingApplication;
-
 import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.viewmodel.DetailProductViewModel;
 
@@ -46,15 +46,13 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         ButterKnife.bind(this, binding.getRoot());
 
         // Toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_left_white_24);
-        toolbar.setNavigationOnClickListener((View v) -> Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp());
-
+        toolbar.setNavigationOnClickListener( (View view) -> Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp() );
 
         // Get bundle arguments
         int productId = getArguments().getInt("productId");
 
         viewModel.getProduct(productId).observe(this, product -> {
-            toolbar.setTitle(product.getName());
+            //toolbar.setTitle(product.getName());
             binding.setVariable(BR.item, product);
             binding.executePendingBindings();
         });

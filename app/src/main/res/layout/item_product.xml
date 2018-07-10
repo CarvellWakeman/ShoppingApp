@@ -22,8 +22,8 @@
             android:id="@+id/textView_id"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@{@string/format_id(item.id)}"
             android:textAppearance="@style/Text.Secondary.Italic"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +66,7 @@
             android:layout_marginStart="8dp"
             android:text="@{item.quantity > 5 ? @string/format_inStock(item.quantity) : @string/format_lowStock(item.quantity)}"
             android:textAppearance="@style/Text.Secondary"
-            android:textColor="@{item.quantity > 5 ? @color/quantityHigh : @color/quantityLow}"
+            android:textColor="@{ item.quantity == 0 ? @color/quantityNone : (item.quantity > 0 ? @color/quantityHigh : @color/quantityLow ) }"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_image"
             app:layout_constraintStart_toEndOf="@+id/imageView_image"
             tools:text="Quantity" />

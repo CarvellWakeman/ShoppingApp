@@ -3,16 +3,15 @@ package carvellwakeman.shoppingapp.listproducts;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.*;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-import android.util.Pair;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.view.*;
 import android.widget.Button;
-import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
@@ -23,14 +22,17 @@ import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
+    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rec_products) RecyclerView recyclerView;
     @BindView(R.id.button) Button button;
-    @BindView(R.id.toolbar) Toolbar toolbar;
 
 
     // Required empty public constructor
@@ -54,7 +56,18 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         ButterKnife.bind(this, view);
 
         // Toolbar
-
+        toolbar.inflateMenu(R.menu.fragment_list_options);
+        toolbar.setNavigationOnClickListener( (View v) -> drawerLayout.openDrawer(GravityCompat.START) );
+        toolbar.setOnMenuItemClickListener( (MenuItem item) -> {
+            switch (item.getItemId()) {
+                case R.id.action_search:
+                    Log.d("LFRG", "Search");
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        });
 
         // RecyclerView boilerplate
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

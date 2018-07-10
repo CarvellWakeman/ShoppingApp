@@ -27,7 +27,7 @@ public abstract class SwipeDeleteCallback extends ItemTouchHelper.SimpleCallback
     public SwipeDeleteCallback(Context context, int dir) {
         super(0, dir);
 
-        this.deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_36);
+        this.deleteIcon = ContextCompat.getDrawable(context, R.drawable.delete);
         this.intrinsicWidth = deleteIcon.getIntrinsicWidth();
         this.intrinsicHeight = deleteIcon.getIntrinsicHeight();
         this.background = new ColorDrawable();

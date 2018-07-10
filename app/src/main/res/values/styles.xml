@@ -6,28 +6,31 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
 
     <!-- Text -->
     <style name="Text">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">@font/product_sans_regular</item>
         <item name="android:textColor">@android:color/tab_indicator_text</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="Text.Secondary">
-        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:fontFamily">@font/product_sans_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Text.Currency">
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:fontFamily">@font/product_sans_bold_italic</item>
     </style>
 
     <style name="Text.Secondary.Italic">
-        <item name="android:textStyle">italic</item>
+        <item name="android:fontFamily">@font/product_sans_italic</item>
     </style>
 
 
