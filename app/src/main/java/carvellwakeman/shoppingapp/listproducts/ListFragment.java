@@ -3,11 +3,9 @@ package carvellwakeman.shoppingapp.listproducts;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.*;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +30,7 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
     @BindView(R.id.rec_products) RecyclerView recyclerView;
     @BindView(R.id.button) Button button;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
 
     // Required empty public constructor
@@ -53,6 +52,9 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
+
+        // Toolbar
+
 
         // RecyclerView boilerplate
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

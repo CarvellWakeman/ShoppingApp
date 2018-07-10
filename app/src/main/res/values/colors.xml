@@ -6,6 +6,7 @@
 
     <color name="textGray">#edeef0</color>
 
+    <color name="white">#FFFFFF</color>
 
     <color name="quantityLow">#d32f2f</color>
     <color name="quantityHigh">#7cb342</color>

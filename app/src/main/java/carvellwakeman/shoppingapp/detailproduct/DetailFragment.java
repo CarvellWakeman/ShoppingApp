@@ -5,35 +5,24 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.support.v7.widget.Toolbar;
+import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.BR;
 import carvellwakeman.shoppingapp.R;
 import carvellwakeman.shoppingapp.ShoppingApplication;
-import carvellwakeman.shoppingapp.data.Product;
-import carvellwakeman.shoppingapp.listproducts.ProductAdapter;
-import carvellwakeman.shoppingapp.utils.SwipeDeleteCallback;
-import carvellwakeman.shoppingapp.view.BaseFragment;
-import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
-import carvellwakeman.shoppingapp.viewmodel.DetailProductViewModel;
-import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import carvellwakeman.shoppingapp.view.BaseFragment;
+import carvellwakeman.shoppingapp.viewmodel.DetailProductViewModel;
 
 
 public class DetailFragment extends BaseFragment<DetailProductViewModel> {
 
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     // Required empty public constructor
     public DetailFragment() {}
@@ -56,10 +45,16 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, container, false);
         ButterKnife.bind(this, binding.getRoot());
 
-        // Get arguments
+        // Toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_left_white_24);
+        toolbar.setNavigationOnClickListener((View v) -> Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp());
+
+
+        // Get bundle arguments
         int productId = getArguments().getInt("productId");
 
         viewModel.getProduct(productId).observe(this, product -> {
+            toolbar.setTitle(product.getName());
             binding.setVariable(BR.item, product);
             binding.executePendingBindings();
         });
