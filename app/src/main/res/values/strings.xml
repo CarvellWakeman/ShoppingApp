@@ -2,8 +2,11 @@
     <string name="app_name">Shopping App</string>
 
     <string name="format_id">Id %s</string>
-    <string name="format_num_available">%d Available</string>
+    <string name="format_inStock">%d In Stock</string>
+    <string name="format_lowStock">Only %d Remaining</string>
     <string name="format_currency">%s %.1f</string>
     <string name="format_length_width_height">%.2f cm (L) X %.2f cm (W) X %.2f cm (H)</string>
     <string name="format_weight">%.2f Kg</string>
+
+    <!-- Product -->
 </resources>

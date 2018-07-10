@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
@@ -36,14 +37,11 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
     // Required empty public constructor
     public ListFragment() {}
 
-    public ListFragment newInstance() {
-        return new ListFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Dagger 2 injection
         ((ShoppingApplication)getActivity().getApplication())
                 .getApplicationComponent()
                 .inject(ListFragment.this);
@@ -86,13 +84,14 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(sdcb);
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
+
+        // (TEMP) Add new product button
         class SimpleProduct {
             String name;
             String desc;
             String url;
             public SimpleProduct(String name, String url, String desc) { this.name = name; this.desc = desc; this.url = url; }
         }
-        // (TEMP) Add new product button
         Random random = new Random();
         List<SimpleProduct> products = new ArrayList<>();
         products.add(

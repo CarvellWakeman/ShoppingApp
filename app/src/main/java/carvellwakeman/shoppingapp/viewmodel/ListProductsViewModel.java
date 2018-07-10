@@ -24,20 +24,12 @@ public class ListProductsViewModel extends ViewModel {
         return repository.getProducts();
     }
 
-    public LiveData<Product> getProduct(int productId) {
-        return repository.getProduct(productId);
-    }
-
     public void addProduct(Product product) {
         repository.createProduct(product);
     }
 
     public void removeProduct(int productId) {
         repository.deleteProduct(productId);
-    }
-
-    public int countProducts() {
-        return repository.countProducts();
     }
 
 }

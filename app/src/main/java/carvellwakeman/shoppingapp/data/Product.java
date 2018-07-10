@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 @Entity
 public class Product implements IBaseEntity{
 
+    @NonNull
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
@@ -42,11 +43,11 @@ public class Product implements IBaseEntity{
     }
 
 
-    public int getId() {
+    @NonNull public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NonNull int id) {
         this.id = id;
     }
 
