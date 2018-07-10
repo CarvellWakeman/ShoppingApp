@@ -10,10 +10,10 @@
 
     <color name="windowBackground">#FFF</color>
 
-
-    <color name="textGray">#edeef0</color>
+    <color name="black">#000</color>
 
     <color name="textColorPrimary">#FFFFFF</color>
+    <color name="textColorSecondary">#edeef0</color>
 
     <color name="quantityNone">#d50000</color>
     <color name="quantityLow">#d32f2f</color>

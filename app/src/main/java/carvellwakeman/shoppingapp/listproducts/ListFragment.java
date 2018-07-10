@@ -4,20 +4,22 @@ package carvellwakeman.shoppingapp.listproducts;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.*;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
 import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.data.Product;
 import carvellwakeman.shoppingapp.utils.SwipeDeleteCallback;
+import carvellwakeman.shoppingapp.view.BaseActivity;
 import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
@@ -29,8 +31,6 @@ import java.util.Random;
 
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
-    @BindView(R.id.drawer_layout) DrawerLayout drawerLayout;
-    @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.rec_products) RecyclerView recyclerView;
     @BindView(R.id.button) Button button;
 
@@ -46,6 +46,9 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         ((ShoppingApplication)getActivity().getApplication())
                 .getApplicationComponent()
                 .inject(ListFragment.this);
+
+        // Toolbar menu
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -56,18 +59,25 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
         ButterKnife.bind(this, view);
 
         // Toolbar
-        toolbar.inflateMenu(R.menu.fragment_list_options);
-        toolbar.setNavigationOnClickListener( (View v) -> drawerLayout.openDrawer(GravityCompat.START) );
-        toolbar.setOnMenuItemClickListener( (MenuItem item) -> {
-            switch (item.getItemId()) {
-                case R.id.action_search:
-                    Log.d("LFRG", "Search");
-                    break;
-                default:
-                    break;
-            }
-            return true;
-        });
+        BaseActivity activity = (BaseActivity) getActivity();
+
+        if (activity != null) {
+            activity.setToolbarNav(R.drawable.menu, (View v) -> activity.openNavDrawer(GravityCompat.START));
+            activity.setToolbarMenu(R.menu.fragment_list_options, (MenuItem item) -> {
+                switch (item.getItemId()) {
+                    case R.id.action_search:
+                        Toast.makeText(getContext(), "Search not implemented", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_cart:
+                        Toast.makeText(getContext(), "Shopping cart not implemented", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            });
+            activity.setToolbarTitle(R.string.app_name);
+        }
 
         // RecyclerView boilerplate
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

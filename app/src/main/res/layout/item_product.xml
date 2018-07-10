@@ -64,9 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{item.quantity > 5 ? @string/format_inStock(item.quantity) : @string/format_lowStock(item.quantity)}"
+            android:text="@{item.quantity == 0 ? @string/format_noStock: (item.quantity > 5 ? @string/format_inStock(item.quantity) : @string/format_lowStock(item.quantity) )}"
             android:textAppearance="@style/Text.Secondary"
-            android:textColor="@{ item.quantity == 0 ? @color/quantityNone : (item.quantity > 0 ? @color/quantityHigh : @color/quantityLow ) }"
+            android:textColor="@{ item.quantity == 0 ? @color/quantityNone : (item.quantity > 5 ? @color/quantityHigh : @color/quantityLow ) }"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_image"
             app:layout_constraintStart_toEndOf="@+id/imageView_image"
             tools:text="Quantity" />

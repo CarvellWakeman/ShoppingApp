@@ -29,6 +29,9 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         else if (modelClass.isAssignableFrom(DetailProductViewModel.class)) {
             return (T) new DetailProductViewModel(repository);
         }
+        else if (modelClass.isAssignableFrom(SettingsViewModel.class)) {
+            return (T) new SettingsViewModel(repository);
+        }
         else {
             throw new IllegalArgumentException("ViewModel Class Not Found");
         }

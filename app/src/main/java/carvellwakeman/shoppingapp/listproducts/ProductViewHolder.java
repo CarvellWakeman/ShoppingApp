@@ -46,7 +46,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> implements View.O
         if (product != null) {
             Bundle bundle = new Bundle();
             bundle.putInt("productId", product.getId());
-            Navigation.findNavController(view).navigate(R.id.action_listFragment_to_detailFragment, bundle);
+            Navigation.findNavController(view).navigate(R.id.detailFragment, bundle);
         }
     }
 }
