@@ -13,7 +13,7 @@
     <color name="black">#000</color>
 
     <color name="textColorPrimary">#FFFFFF</color>
-    <color name="textColorSecondary">#edeef0</color>
+    <color name="textColorSecondary">#cfd8dc</color>
 
     <color name="quantityNone">#d50000</color>
     <color name="quantityLow">#d32f2f</color>
