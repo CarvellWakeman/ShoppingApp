@@ -2,8 +2,9 @@ package carvellwakeman.shoppingapp.dagger;
 
 
 import android.arch.lifecycle.ViewModelProvider;
-import carvellwakeman.shoppingapp.data.IProductRepository;
-import carvellwakeman.shoppingapp.data.IShoppingCartItemRepository;
+import carvellwakeman.shoppingapp.data.product.IProductRepository;
+import carvellwakeman.shoppingapp.data.shoppingcartitem.IShoppingCartItemRepository;
+import carvellwakeman.shoppingapp.data.user.IUserRepository;
 import carvellwakeman.shoppingapp.viewmodel.ViewModelFactory;
 import dagger.Module;
 import dagger.Provides;
@@ -19,8 +20,8 @@ public class ViewModelModule {
     // View Model Factory
     @Provides
     @Singleton
-    ViewModelProvider.Factory provideViewModelFactory(IProductRepository productRepository, IShoppingCartItemRepository shoppingCartItemRepository){
-        return new ViewModelFactory(productRepository, shoppingCartItemRepository);
+    ViewModelProvider.Factory provideViewModelFactory(IUserRepository userRepository, IProductRepository productRepository, IShoppingCartItemRepository shoppingCartItemRepository){
+        return new ViewModelFactory(userRepository, productRepository, shoppingCartItemRepository);
     }
 
 }

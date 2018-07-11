@@ -1,4 +1,4 @@
-package carvellwakeman.shoppingapp.data;
+package carvellwakeman.shoppingapp.data.shoppingcartitem;
 
 
 import android.arch.lifecycle.LiveData;
@@ -6,6 +6,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import carvellwakeman.shoppingapp.data.product.Product;
 
 import java.util.List;
 
@@ -18,12 +19,12 @@ import java.util.List;
 public interface IShoppingCartItemDao {
 
     // Get List
-    @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id")
-    LiveData<List<Product>> getShoppingCartProducts();
+    @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id WHERE s.userId = :userId")
+    LiveData<List<Product>> getShoppingCartProducts(int userId);
 
     // Has Item
-    @Query("SELECT EXISTS(SELECT 1 FROM ShoppingCartItem s WHERE s.productId = :productId LIMIT 1)")
-    LiveData<Boolean> shoppingCartHasProduct(int productId);
+    @Query("SELECT EXISTS(SELECT 1 FROM ShoppingCartItem s WHERE s.productId = :productId AND s.userId = :userId LIMIT 1)")
+    LiveData<Boolean> shoppingCartHasProduct(int userId, int productId);
 
     // Insert/Replace Item
     @Insert(onConflict = OnConflictStrategy.REPLACE)

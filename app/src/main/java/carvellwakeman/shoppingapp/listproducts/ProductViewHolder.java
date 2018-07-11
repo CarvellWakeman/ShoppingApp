@@ -9,9 +9,9 @@ import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
-import carvellwakeman.shoppingapp.data.Product;
+import carvellwakeman.shoppingapp.data.product.Product;
 import carvellwakeman.shoppingapp.view.BaseViewHolder;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 
 public class ProductViewHolder extends BaseViewHolder<Product> implements View.OnClickListener {
@@ -33,7 +33,7 @@ public class ProductViewHolder extends BaseViewHolder<Product> implements View.O
 
         // Get image
         //imageView.setImageResource(Integer.valueOf(object.getImageUrl()));
-        Picasso.get().load(object.getImageUrl()).into(imageView);
+        Glide.with(binding.getRoot()).load(object.getImageUrl()).into(imageView);
     }
 
 

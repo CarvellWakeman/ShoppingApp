@@ -1,10 +1,10 @@
-package carvellwakeman.shoppingapp.data;
+package carvellwakeman.shoppingapp.data.product;
 
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.databinding.Bindable;
 import android.support.annotation.NonNull;
+import carvellwakeman.shoppingapp.data.IBaseEntity;
 
 
 /*
@@ -13,7 +13,7 @@ import android.support.annotation.NonNull;
  * If this application used data-binding, this class could act as a contract for that as well.
  */
 @Entity
-public class Product implements IBaseEntity{
+public class Product implements IBaseEntity {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -136,7 +136,7 @@ public class Product implements IBaseEntity{
 
 
     @Override
-    public boolean equals(Object product) {
-        return (product instanceof Product) && this.id == ((Product)product).id;
+    public boolean equals(Object other) {
+        return (other instanceof Product) && this.id == ((Product)other).id;
     }
 }

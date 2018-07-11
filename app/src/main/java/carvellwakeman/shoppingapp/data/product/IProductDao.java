@@ -1,4 +1,4 @@
-package carvellwakeman.shoppingapp.data;
+package carvellwakeman.shoppingapp.data.product;
 
 
 import android.arch.lifecycle.LiveData;

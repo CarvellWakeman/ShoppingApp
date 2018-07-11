@@ -1,8 +1,10 @@
-package carvellwakeman.shoppingapp.data;
+package carvellwakeman.shoppingapp.data.shoppingcartitem;
 
 
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import carvellwakeman.shoppingapp.data.product.IProductDao;
+import carvellwakeman.shoppingapp.data.product.Product;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -26,13 +28,13 @@ public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
     }
 
     @Override
-    public LiveData<List<Product>> getShoppingCartProducts() {
-        return shoppingCartItemDao.getShoppingCartProducts();
+    public LiveData<List<Product>> getShoppingCartProducts(int userId) {
+        return shoppingCartItemDao.getShoppingCartProducts(userId);
     }
 
     @Override
-    public LiveData<Boolean> shoppingCartHasProduct(int productId) {
-        return shoppingCartItemDao.shoppingCartHasProduct(productId);
+    public LiveData<Boolean> shoppingCartHasProduct(int userId, int productId) {
+        return shoppingCartItemDao.shoppingCartHasProduct(userId, productId);
     }
 
     @Override

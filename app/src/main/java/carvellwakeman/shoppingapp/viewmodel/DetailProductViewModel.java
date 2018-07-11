@@ -3,10 +3,10 @@ package carvellwakeman.shoppingapp.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
-import carvellwakeman.shoppingapp.data.IProductRepository;
-import carvellwakeman.shoppingapp.data.IShoppingCartItemRepository;
-import carvellwakeman.shoppingapp.data.Product;
-import carvellwakeman.shoppingapp.data.ShoppingCartItem;
+import carvellwakeman.shoppingapp.data.product.IProductRepository;
+import carvellwakeman.shoppingapp.data.shoppingcartitem.IShoppingCartItemRepository;
+import carvellwakeman.shoppingapp.data.product.Product;
+import carvellwakeman.shoppingapp.data.shoppingcartitem.ShoppingCartItem;
 
 import javax.inject.Inject;
 
@@ -26,12 +26,12 @@ public class DetailProductViewModel extends ViewModel {
         return productRepository.getProduct(productId);
     }
 
-    public LiveData<Boolean> shoppingCartHasProduct(int productId) {
-            return shoppingCartItemRepository.shoppingCartHasProduct(productId);
+    public LiveData<Boolean> shoppingCartHasProduct(int userId, int productId) {
+            return shoppingCartItemRepository.shoppingCartHasProduct(userId, productId);
     }
 
-    public void addShoppingCartItem(int productId) {
-        shoppingCartItemRepository.createShoppingCartItem(new ShoppingCartItem(productId));
+    public void addShoppingCartItem(int userId, int productId) {
+        shoppingCartItemRepository.createShoppingCartItem(new ShoppingCartItem(userId, productId));
     }
 
 }

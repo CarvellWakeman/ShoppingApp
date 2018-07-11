@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,14 +17,13 @@ import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.view.BaseActivity;
 import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.viewmodel.DetailProductViewModel;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 
 public class DetailFragment extends BaseFragment<DetailProductViewModel> {
 
     @BindView(R.id.imageView_image) ImageView productImage;
-    @BindView(R.id.button_addToCart)
-    Button buttonAddToCart;
+    @BindView(R.id.button_addToCart) Button buttonAddToCart;
 
 
     // Required empty public constructor
@@ -65,30 +63,36 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         }
 
         // Get bundle arguments
-        int productId = getArguments().getInt("productId");
+        Bundle args = getArguments();
+        if (args != null) {
+            final int productId = args.getInt("productId");
+            final int userId = ((ShoppingApplication)getActivity().getApplication()).getUser();
 
-        viewModel.getProduct(productId).observe(this, product -> {
-            activity.setToolbarTitle(product.getName());
-            binding.setVariable(BR.item, product);
-            binding.executePendingBindings();
+            viewModel.getProduct(productId).observe(this, product -> {
+                if (activity != null && product != null) {
+                    activity.setToolbarTitle(product.getName());
+                    binding.setVariable(BR.item, product);
+                    binding.executePendingBindings();
 
-            // Get image
-            Picasso.get().load(product.getImageUrl()).into(productImage);
-        });
+                    // Get image
+                    Glide.with(this).load(product.getImageUrl()).into(productImage);
+                }
+            });
 
-        viewModel.shoppingCartHasProduct(productId).observe(this, hasProduct -> {
-            if (hasProduct != null && hasProduct) {
+            viewModel.shoppingCartHasProduct(userId, productId).observe(this, hasProduct -> {
+                if (hasProduct != null && hasProduct) {
+                    buttonAddToCart.setEnabled(false);
+                    buttonAddToCart.setText(R.string.action_inCart);
+                }
+            });
+
+            // Add to cart button
+            buttonAddToCart.setOnClickListener( (View v) -> {
+                viewModel.addShoppingCartItem(userId, productId);
                 buttonAddToCart.setEnabled(false);
                 buttonAddToCart.setText(R.string.action_inCart);
-            }
-        });
-
-        // Add to cart button
-        buttonAddToCart.setOnClickListener( (View v) -> {
-            viewModel.addShoppingCartItem(productId);
-            buttonAddToCart.setEnabled(false);
-            buttonAddToCart.setText(R.string.action_inCart);
-        });
+            });
+        }
 
         // Inflate the layout for this fragment
         return binding.getRoot();

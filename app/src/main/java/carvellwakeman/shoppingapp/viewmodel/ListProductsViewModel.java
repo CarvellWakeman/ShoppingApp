@@ -2,10 +2,9 @@ package carvellwakeman.shoppingapp.viewmodel;
 
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import carvellwakeman.shoppingapp.data.IProductRepository;
-import carvellwakeman.shoppingapp.data.Product;
+import carvellwakeman.shoppingapp.data.product.IProductRepository;
+import carvellwakeman.shoppingapp.data.product.Product;
 
 import javax.inject.Inject;
 import java.util.List;

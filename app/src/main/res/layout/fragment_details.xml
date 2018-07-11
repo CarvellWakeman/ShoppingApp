@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="carvellwakeman.shoppingapp.data.Product" />
+            type="carvellwakeman.shoppingapp.data.product.Product" />
     </data>
 
     <ScrollView

@@ -6,8 +6,7 @@ import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import carvellwakeman.shoppingapp.data.Product;
-import carvellwakeman.shoppingapp.listproducts.ProductViewHolder;
+import carvellwakeman.shoppingapp.data.product.Product;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
 
 import java.util.List;
