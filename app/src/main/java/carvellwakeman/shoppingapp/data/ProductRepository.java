@@ -44,5 +44,5 @@ public class ProductRepository implements IProductRepository {
         AsyncTask.execute(() -> productDao.deleteProduct(productId));
     }
 
-    public int countProducts() { return productDao.countProducts(); }
+    public void deleteAllProducts() { productDao.deleteAllProducts(); }
 }

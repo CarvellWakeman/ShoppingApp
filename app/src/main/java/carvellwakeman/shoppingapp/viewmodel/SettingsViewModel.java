@@ -22,4 +22,8 @@ public class SettingsViewModel extends ViewModel {
         repository.createProduct(product);
     }
 
+    public void deleteAllProducts() {
+        repository.deleteAllProducts();
+    }
+
 }

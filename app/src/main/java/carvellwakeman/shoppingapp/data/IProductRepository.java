@@ -14,5 +14,5 @@ public interface IProductRepository {
 
     void deleteProduct(int productId);
 
-    int countProducts();
+    void deleteAllProducts();
 }

@@ -26,8 +26,9 @@ import java.util.Random;
 
 public class SettingsFragment extends BaseFragment<SettingsViewModel> {
 
-    @BindView(R.id.button)
-    Button button;
+    @BindView(R.id.buttonAdd)
+    Button buttonAdd;
+    @BindView(R.id.buttonDeleteAll) Button buttonDeleteAll;
 
     // Required empty public constructor
     public SettingsFragment() {}
@@ -79,10 +80,14 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> {
         products.add(new SimpleProduct("2010 Buick Regal", "https://i.imgur.com/kiXpolz.jpg", "It's a car with many moving pieces and some of them work."));
 
 
-        button.setOnClickListener((View v) -> {
+        buttonAdd.setOnClickListener((View v) -> {
             for (SimpleProduct p : products) {
                 viewModel.addProduct(new Product(p.name, p.desc, p.url, random.nextInt(100), random.nextDouble() * 300.0d, random.nextInt(100), random.nextFloat() * 10.0f, random.nextFloat() * 50.0f, random.nextFloat() * 50.0f, random.nextFloat() * 50.0f));
             }
+        });
+
+        buttonDeleteAll.setOnClickListener((View v) -> {
+            viewModel.deleteAllProducts();
         });
 
         // Inflate the layout for this fragment
