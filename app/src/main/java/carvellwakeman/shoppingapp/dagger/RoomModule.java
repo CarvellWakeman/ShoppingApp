@@ -3,10 +3,7 @@ package carvellwakeman.shoppingapp.dagger;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
-import carvellwakeman.shoppingapp.data.IProductDao;
-import carvellwakeman.shoppingapp.data.IProductRepository;
-import carvellwakeman.shoppingapp.data.ProductRepository;
-import carvellwakeman.shoppingapp.data.ShoppingDatabase;
+import carvellwakeman.shoppingapp.data.*;
 import dagger.Module;
 import dagger.Provides;
 
@@ -29,15 +26,28 @@ public class RoomModule {
     // Repositories
     @Provides
     @Singleton
-    IProductRepository provideProductRepository(IProductDao productDao) {
-        return new ProductRepository(productDao);
+    IProductRepository provideProductRepository(IProductDao dao) {
+        return new ProductRepository(dao);
     }
+
+    @Provides
+    @Singleton
+    IShoppingCartItemRepository provideShoppingCartItemRepository(IShoppingCartItemDao dao) {
+        return new ShoppingCartItemRepository(dao);
+    }
+
 
     // DAOs
     @Provides
     @Singleton
     IProductDao provideProductDao() {
         return database.productDao();
+    }
+
+    @Provides
+    @Singleton
+    IShoppingCartItemDao provideShoppingCartItemDao() {
+        return database.shoppingCartItemDao();
     }
 
     // Database

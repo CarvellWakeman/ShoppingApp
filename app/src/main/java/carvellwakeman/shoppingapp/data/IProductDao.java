@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /*
- * This DAO (data access object) describes the actions that can be taken on the Product entity.
+ * This DAO (data access object) describes the actions that can be taken on its entity.
  * It is given to Room to in order to help build the database.
  */
 @Dao

@@ -18,4 +18,8 @@ public class SettingsViewModel extends ViewModel {
         this.repository = repository;
     }
 
+    public void addProduct(Product product) {
+        repository.createProduct(product);
+    }
+
 }

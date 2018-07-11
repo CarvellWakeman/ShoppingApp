@@ -17,9 +17,17 @@
     <!-- Text -->
     <style name="Text">
         <item name="android:fontFamily">@font/product_sans_regular</item>
-        <item name="android:textColor">@color/textColorSecondary</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Text.Italic">
+        <item name="android:fontFamily">@font/product_sans_italic</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Text.Italic.Bold">
+        <item name="android:fontFamily">@font/product_sans_bold_italic</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Text.Secondary">
@@ -28,12 +36,26 @@
         <item name="android:textColor">@color/textColorSecondary</item>
     </style>
 
+    <style name="Text.Secondary.Small" parent="Text.Secondary">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="Text.Currency">
         <item name="android:fontFamily">@font/product_sans_bold_italic</item>
     </style>
 
     <style name="Text.Secondary.Italic">
         <item name="android:fontFamily">@font/product_sans_italic</item>
+    </style>
+
+
+    <!-- Buttons -->
+    <style name="ButtonColored" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:fontFamily">@font/product_sans_regular</item>
+        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
     </style>
 
 

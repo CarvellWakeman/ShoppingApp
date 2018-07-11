@@ -9,6 +9,12 @@
     <string name="format_currency">%s %.1f</string>
     <string name="format_length_width_height">%.2f cm (L) X %.2f cm (W) X %.2f cm (H)</string>
     <string name="format_weight">%.2f Kg</string>
+    <string name="format_rating">%d%% Positive Reviews</string>
+
+    <!-- Actions -->
+    <string name="action_addToCart">Add To Cart</string>
+    <string name="action_checkout">Proceed to Checkout</string>
+    <string name="action_inCart">Added!</string>
 
     <!-- Menus -->
     <string name="menu_home">Home</string>

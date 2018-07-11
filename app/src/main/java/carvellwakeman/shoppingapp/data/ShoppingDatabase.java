@@ -11,10 +11,11 @@ import android.support.annotation.NonNull;
  * This is an extension of a Room database object.
  * It specifies the tables (entities) which will be created in the database.
  */
-@Database(entities = {Product.class}, exportSchema = false, version = 3)
+@Database(entities = {Product.class, ShoppingCartItem.class}, exportSchema = false, version = 6)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
     public abstract IProductDao productDao();
+    public abstract IShoppingCartItemDao shoppingCartItemDao();
 
 
 //    public static MigrationContainer migrations;

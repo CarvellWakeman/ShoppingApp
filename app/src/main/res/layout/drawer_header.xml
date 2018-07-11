@@ -54,7 +54,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="lerew.zach@gmail.com"
-                android:textAppearance="@style/Text.Secondary" />
+                android:textAppearance="@style/Text.Secondary"
+                android:textColor="#cfd8dc"/>
         </LinearLayout>
 
         <ImageView

@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_listFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -29,10 +32,18 @@
         <argument
             android:name="productId"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/action_detailFragment_to_shoppingCartFragment"
+            app:destination="@id/shoppingCartFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="carvellwakeman.shoppingapp.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/shoppingCartFragment"
+        android:name="carvellwakeman.shoppingapp.shoppingcart.ShoppingCartFragment"
+        android:label="fragment_shoppingcart"
+        tools:layout="@layout/fragment_shoppingcart" />
 </navigation>

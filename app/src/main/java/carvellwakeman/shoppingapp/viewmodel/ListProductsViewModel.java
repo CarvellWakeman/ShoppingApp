@@ -15,26 +15,13 @@ public class ListProductsViewModel extends ViewModel {
 
     private final IProductRepository repository;
 
-    private LiveData<List<Product>> products;
-
     @Inject
     public ListProductsViewModel(IProductRepository repository) {
         this.repository = repository;
-        this.products = repository.getProducts();
     }
 
     public LiveData<List<Product>> getProducts() {
-        return products;
-    }
-
-    public void addProduct(Product product) {
-        repository.createProduct(product);
-        products = repository.getProducts();
-    }
-
-    public void removeProduct(int productId) {
-        repository.deleteProduct(productId);
-        products = repository.getProducts();
+        return repository.getProducts();
     }
 
 }

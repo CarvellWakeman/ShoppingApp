@@ -10,50 +10,150 @@
             type="carvellwakeman.shoppingapp.data.Product" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView_id"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{@string/format_id(item.id)}"
-            android:textAppearance="@style/Text.Secondary.Italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Id" />
-
-        <TextView
-            android:id="@+id/textView_lengthWidthHeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="@{@string/format_length_width_height(item.length, item.width, item.height)}"
-            android:textAppearance="@style/Text.Secondary.Italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_id"
-            tools:text="Length X Width X Height" />
-
-        <TextView
-            android:id="@+id/textView_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{@string/format_weight(item.weight)}"
-            android:textAppearance="@style/Text.Secondary.Italic"
-            app:layout_constraintEnd_toEndOf="@+id/textView_lengthWidthHeight"
-            app:layout_constraintStart_toStartOf="@+id/textView_lengthWidthHeight"
-            app:layout_constraintTop_toBottomOf="@+id/textView_lengthWidthHeight"
-            tools:text="Weight" />
+            android:orientation="vertical">
 
 
-    </android.support.constraint.ConstraintLayout>
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <ImageView
+                    android:id="@+id/imageView_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="256dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="@{item.name}"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="100dp"
+                    tools:text="Image" />
+            </FrameLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="256dp"
+                    android:layout_height="2dp"
+                    android:background="@color/colorPrimaryLight"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{item.name}"
+                    android:textAppearance="@style/Text"
+                    app:layout_constraintEnd_toStartOf="@+id/textView_Cost"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    tools:text="Name" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="92dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:max="100"
+                    android:progress="@{item.rating}"
+                    android:progressTint="@color/burntOrange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_Name" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textAppearance="@style/Text.Secondary.Small"
+                    android:text="@{@string/format_rating(item.rating)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintStart_toEndOf="@+id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/progressBar"
+                    tools:text="Rating" />
+
+                <TextView
+                    android:id="@+id/textView_Description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{item.description}"
+                    android:textAppearance="@style/Text.Secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                    tools:text="Description" />
+
+                <TextView
+                    android:id="@+id/textView_Cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, item.cost)}"
+                    android:textAppearance="@style/Text.Italic.Bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView_Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Cost" />
+
+                <Button
+                    android:id="@+id/button_addToCart"
+                    style="@style/ButtonColored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:elevation="4dp"
+                    android:text="@string/action_addToCart"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_Description"
+                    tools:text="@string/action_addToCart" />
+
+                <TextView
+                    android:id="@+id/textView_lengthWidthHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/format_length_width_height(item.length, item.width, item.height)}"
+                    android:textAppearance="@style/Text.Secondary.Italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView_weight"
+                    tools:text="Length X Width X Height" />
+
+                <TextView
+                    android:id="@+id/textView_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@{@string/format_weight(item.weight)}"
+                    android:textAppearance="@style/Text.Secondary.Italic"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_lengthWidthHeight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_addToCart"
+                    tools:text="Weight" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
 </layout>

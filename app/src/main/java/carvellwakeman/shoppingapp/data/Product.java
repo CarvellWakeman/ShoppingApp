@@ -23,19 +23,22 @@ public class Product implements IBaseEntity{
     private String imageUrl;
     private Integer quantity;
     private Double cost;
+    private Integer rating;
     private Float weight;
     private Float length;
     private Float width;
     private Float height;
 
 
-    public Product(String name, String description, String imageUrl, Integer quantity, Double cost, Float weight, Float length, Float width, Float height) {
+    public Product(String name, String description, String imageUrl, Integer quantity, Double cost, Integer rating, Float weight, Float length, Float width, Float height) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
 
         this.quantity = quantity;
         this.cost = cost;
+        this.rating = rating;
+
         this.weight = weight;
         this.length = length;
         this.width = width;
@@ -89,6 +92,14 @@ public class Product implements IBaseEntity{
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     public Float getWeight() {

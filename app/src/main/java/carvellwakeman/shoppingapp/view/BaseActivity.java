@@ -35,6 +35,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         // Navigation drawer
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home); // Select home item
     }
 
     @Override
@@ -84,7 +85,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.listFragment);
                 break;
             case R.id.nav_cart:
-                Toast.makeText(this, "Shopping cart not implemented", Toast.LENGTH_SHORT).show();
+                navigationView.setCheckedItem(item.getItemId());
+                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.shoppingCartFragment);
                 break;
             case R.id.nav_deals:
                 Toast.makeText(this, "Deals not implemented", Toast.LENGTH_SHORT).show();

@@ -1,4 +1,4 @@
-package carvellwakeman.shoppingapp.listproducts;
+package carvellwakeman.shoppingapp.shoppingcart;
 
 
 import android.databinding.ViewDataBinding;
@@ -14,12 +14,12 @@ import carvellwakeman.shoppingapp.view.BaseViewHolder;
 import com.squareup.picasso.Picasso;
 
 
-public class ProductViewHolder extends BaseViewHolder<Product> implements View.OnClickListener {
+public class ShoppingCartItemViewHolder extends BaseViewHolder<Product> implements View.OnClickListener    {
 
     @BindView(R.id.imageView_image) ImageView imageView;
     private Product product;
 
-    public ProductViewHolder(ViewDataBinding binding) {
+    public ShoppingCartItemViewHolder(ViewDataBinding binding) {
         super(binding);
         ButterKnife.bind(this, binding.getRoot());
 
@@ -32,7 +32,6 @@ public class ProductViewHolder extends BaseViewHolder<Product> implements View.O
         product = object;
 
         // Get image
-        //imageView.setImageResource(Integer.valueOf(object.getImageUrl()));
         Picasso.get().load(object.getImageUrl()).into(imageView);
     }
 
