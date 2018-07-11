@@ -24,24 +24,40 @@ public class UserRepository implements IUserRepository {
     }
 
     // Get Items
+    @Override
     public LiveData<List<User>> getUsers() {
         return userDao.getUsers();
     }
 
     // Get Item
+    @Override
     public LiveData<User> getUser(int userId) {
         return userDao.getUser(userId);
     }
 
     // Insert Item
+    @Override
     public void createUser(User user) {
         AsyncTask.execute(() -> userDao.insertUser(user));
     }
 
     // Delete Item
+    @Override
     public void deleteUser(int userId) {
         AsyncTask.execute(() -> userDao.deleteUser(userId));
     }
 
+    @Override
     public void deleteAllUsers() { AsyncTask.execute(() -> userDao.deleteAllUsers()); }
+
+    @Override
+    public LiveData<User> getActiveUser() {
+        return userDao.getActiveUser();
+    }
+
+    @Override
+    public void setActiveUser(int userId) {
+        AsyncTask.execute(() -> userDao.setActiveUser(new ActiveUser(userId)));
+    }
+
 }

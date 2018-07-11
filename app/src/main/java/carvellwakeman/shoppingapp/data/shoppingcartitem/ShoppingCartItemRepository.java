@@ -28,13 +28,13 @@ public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
     }
 
     @Override
-    public LiveData<List<Product>> getShoppingCartProducts(int userId) {
-        return shoppingCartItemDao.getShoppingCartProducts(userId);
+    public LiveData<List<Product>> getShoppingCartProducts() {
+        return shoppingCartItemDao.getShoppingCartProducts();
     }
 
     @Override
-    public LiveData<Boolean> shoppingCartHasProduct(int userId, int productId) {
-        return shoppingCartItemDao.shoppingCartHasProduct(userId, productId);
+    public LiveData<Boolean> shoppingCartHasProduct(int productId) {
+        return shoppingCartItemDao.shoppingCartHasProduct(productId);
     }
 
     @Override

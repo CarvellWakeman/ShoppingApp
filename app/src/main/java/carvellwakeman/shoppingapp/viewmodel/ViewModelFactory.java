@@ -33,13 +33,13 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ListProductsViewModel(productRepository);
         }
         else if (modelClass.isAssignableFrom(DetailProductViewModel.class)) {
-            return (T) new DetailProductViewModel(productRepository, shoppingCartItemRepository);
+            return (T) new DetailProductViewModel(userRepository, productRepository, shoppingCartItemRepository);
         }
         else if (modelClass.isAssignableFrom(SettingsViewModel.class)) {
             return (T) new SettingsViewModel(productRepository, userRepository);
         }
         else if (modelClass.isAssignableFrom(ShoppingCartViewModel.class)) {
-            return (T) new ShoppingCartViewModel(shoppingCartItemRepository);
+            return (T) new ShoppingCartViewModel(userRepository, shoppingCartItemRepository);
         }
         else {
             throw new IllegalArgumentException("ViewModel Class Not Found");

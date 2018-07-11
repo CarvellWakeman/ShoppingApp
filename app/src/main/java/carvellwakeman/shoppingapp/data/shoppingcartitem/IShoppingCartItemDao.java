@@ -19,12 +19,12 @@ import java.util.List;
 public interface IShoppingCartItemDao {
 
     // Get List
-    @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id WHERE s.userId = :userId")
-    LiveData<List<Product>> getShoppingCartProducts(int userId);
+    @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id WHERE s.userId IN (SELECT userId FROM ActiveUser LIMIT 1)")
+    LiveData<List<Product>> getShoppingCartProducts();
 
     // Has Item
-    @Query("SELECT EXISTS(SELECT 1 FROM ShoppingCartItem s WHERE s.productId = :productId AND s.userId = :userId LIMIT 1)")
-    LiveData<Boolean> shoppingCartHasProduct(int userId, int productId);
+    @Query("SELECT EXISTS(SELECT 1 FROM ShoppingCartItem s WHERE s.productId = :productId AND s.userId IN (SELECT userId FROM ActiveUser LIMIT 1) LIMIT 1)")
+    LiveData<Boolean> shoppingCartHasProduct(int productId);
 
     // Insert/Replace Item
     @Insert(onConflict = OnConflictStrategy.REPLACE)

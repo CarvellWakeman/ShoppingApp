@@ -59,7 +59,7 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
                         Toast.makeText(getContext(), "Search not implemented", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_cart:
-                        Navigation.findNavController(activity, R.id.nav_host_fragment).navigate(R.id.shoppingCartFragment);
+                        activity.getNavController().navigate(R.id.shoppingCartFragment);
                         break;
                     default:
                         break;

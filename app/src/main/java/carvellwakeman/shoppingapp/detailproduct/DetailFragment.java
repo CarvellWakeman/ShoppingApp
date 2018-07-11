@@ -49,11 +49,11 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         BaseActivity activity = (BaseActivity) getActivity();
 
         if (activity != null) {
-            activity.setToolbarNav(R.drawable.arrow_left, (View v) -> Navigation.findNavController(activity, R.id.nav_host_fragment).navigateUp());
+            activity.setToolbarNav(R.drawable.arrow_left, (View v) -> activity.getNavController().navigateUp());
             activity.setToolbarMenu(R.menu.fragment_details_options, (MenuItem item) -> {
                 switch (item.getItemId()) {
                     case R.id.action_cart:
-                        Navigation.findNavController(activity, R.id.nav_host_fragment).navigate(R.id.shoppingCartFragment);
+                        activity.getNavController().navigate(R.id.shoppingCartFragment);
                         break;
                     default:
                         break;
@@ -66,7 +66,6 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         Bundle args = getArguments();
         if (args != null) {
             final int productId = args.getInt("productId");
-            final int userId = ((ShoppingApplication)getActivity().getApplication()).getUser();
 
             viewModel.getProduct(productId).observe(this, product -> {
                 if (activity != null && product != null) {
@@ -79,18 +78,22 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
                 }
             });
 
-            viewModel.shoppingCartHasProduct(userId, productId).observe(this, hasProduct -> {
+            viewModel.shoppingCartHasProduct(productId).observe(this, hasProduct -> {
                 if (hasProduct != null && hasProduct) {
                     buttonAddToCart.setEnabled(false);
-                    buttonAddToCart.setText(R.string.action_inCart);
+                    buttonAddToCart.setText(R.string.status_inCart);
                 }
             });
 
             // Add to cart button
-            buttonAddToCart.setOnClickListener( (View v) -> {
-                viewModel.addShoppingCartItem(userId, productId);
-                buttonAddToCart.setEnabled(false);
-                buttonAddToCart.setText(R.string.action_inCart);
+            viewModel.getActiveUser().observe(this, user -> {
+                if (user != null) {
+                    buttonAddToCart.setOnClickListener( (View v) -> {
+                        viewModel.addShoppingCartItem(user.getId(), productId);
+                        buttonAddToCart.setEnabled(false);
+                        buttonAddToCart.setText(R.string.status_inCart);
+                    });
+                }
             });
         }
 

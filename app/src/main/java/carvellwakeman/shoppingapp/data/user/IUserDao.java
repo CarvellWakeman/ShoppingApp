@@ -37,4 +37,12 @@ public interface IUserDao {
     @Query("DELETE FROM User")
     void deleteAllUsers();
 
+    // Get Active User
+    @Query("SELECT * FROM User u WHERE u.id IN (SELECT userId FROM ActiveUser LIMIT 1) LIMIT 1")
+    LiveData<User> getActiveUser();
+
+    // Set Active User
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void setActiveUser(ActiveUser activeUser);
+
 }

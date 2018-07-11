@@ -56,7 +56,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
 
         if (activity != null) {
             // Toolbar
-            activity.setToolbarNav(R.drawable.arrow_left, (View v) -> Navigation.findNavController(activity, R.id.nav_host_fragment).navigateUp());
+            activity.setToolbarNav(R.drawable.arrow_left, (View v) -> activity.getNavController().navigateUp());
             activity.setToolbarMenu(R.menu.empty_options, null);
             activity.setToolbarTitle(R.string.menu_cart);
 
@@ -65,11 +65,9 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.addItemDecoration(new DividerItemDecoration(activity, DividerItemDecoration.VERTICAL));
 
-            // Get current user
-            final int userId = ((ShoppingApplication) getActivity().getApplication()).getUser();
 
             // Subscribe recyclerview adapter to viewModel LiveData
-            viewModel.getProducts(userId).observe(this, products -> {
+            viewModel.getProducts().observe(this, products -> {
                 if (recyclerView.getAdapter() == null) {
                     recyclerView.setAdapter(new ShoppingCartItemAdapter(products, R.layout.item_shopping_cart_product));
                 }

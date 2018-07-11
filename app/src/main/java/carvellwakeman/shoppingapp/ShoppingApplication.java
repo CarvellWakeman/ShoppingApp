@@ -14,13 +14,6 @@ public class ShoppingApplication extends Application {
 
     private IApplicationComponent applicationComponent;
 
-    private Integer userId;
-
-    // Shared preferences
-    private SharedPreferences sharedPreferences;
-    private final String PREF_KEY = "shoppingAppPrefs";
-    private final String USER_KEY = "currentUserId";
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,24 +22,10 @@ public class ShoppingApplication extends Application {
                 .builder()
                 .roomModule(new RoomModule(this))
                 .build();
-
-        // Initially load user
-        sharedPreferences = getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE);
-        userId = sharedPreferences.getInt(USER_KEY, -1);
     }
 
     public IApplicationComponent getApplicationComponent() {
         return applicationComponent;
     }
-
-    public void setUser(int userId) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(USER_KEY, userId);
-        editor.apply();
-
-        this.userId = userId;
-    }
-
-    public Integer getUser() { return userId; }
 
 }

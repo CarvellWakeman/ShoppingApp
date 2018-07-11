@@ -1,8 +1,10 @@
 package carvellwakeman.shoppingapp.view;
 
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,14 +12,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
+import carvellwakeman.shoppingapp.ShoppingApplication;
+import carvellwakeman.shoppingapp.data.user.IUserRepository;
+import carvellwakeman.shoppingapp.data.user.User;
+import carvellwakeman.shoppingapp.selectuser.SelectUserDialogFragment;
+import com.bumptech.glide.Glide;
+
+import javax.inject.Inject;
+import java.util.HashMap;
 
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseActivity extends AppCompatActivity implements NavHost, SelectUserDialogFragment.SelectUserInterfaceListener {
 
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
@@ -26,6 +40,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    View navigationHeader;
+    ConstraintLayout buttonSelectUser;
+    de.hdodenhof.circleimageview.CircleImageView userImage;
+    TextView userName;
+    TextView userEmail;
+
+    @Inject
+    IUserRepository userRepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +56,44 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         ButterKnife.bind(this);
 
-        // Navigation drawer
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home); // Select home item
-    }
+        // Dagger 2 injection
+        ((ShoppingApplication) getApplication()).getApplicationComponent().inject(BaseActivity.this);
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        return Navigation.findNavController(this, R.id.nav_host_fragment).navigateUp();
+        // Navigation drawer
+        NavigationUI.setupWithNavController(navigationView, this.getNavController());
+        NavigationUI.navigateUp(drawerLayout, this.getNavController());
+
+        navigationHeader = navigationView.getHeaderView(0);
+        buttonSelectUser = navigationHeader.findViewById(R.id.selectUser);
+        userImage = navigationHeader.findViewById(R.id.userImage);
+        userName = navigationHeader.findViewById(R.id.userName);
+        userEmail = navigationHeader.findViewById(R.id.userEmail);
+
+        // Switch user
+        userRepository.getUsers().observe(this, users -> {
+            buttonSelectUser.setOnClickListener((View v) -> {
+                // Get emails from list of users
+                // Java 8 streams would be great here, but not supported on API < 24
+                DialogFragment dialog = new SelectUserDialogFragment();
+
+                if (users != null && users.size() > 0) {
+                    HashMap<String, Integer> userMap = new HashMap<>();
+                    for (User u : users) { userMap.put(u.getEmail(), u.getId()); }
+                    ((SelectUserDialogFragment) dialog).users = userMap;
+                }
+
+                dialog.show(getFragmentManager(), "selectUser");
+            });
+        });
+
+        // Navigation drawer active user
+        userRepository.getActiveUser().observe(this, user -> {
+            if (user != null) {
+                Glide.with(this).load(user.getImageUrl()).into(userImage);
+                userName.setText(user.getName());
+                userEmail.setText(user.getEmail());
+            }
+        });
     }
 
     // Toolbar
@@ -77,37 +130,16 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.closeDrawer(gravityCompat);
     }
 
+    // User selection
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                navigationView.setCheckedItem(item.getItemId());
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.listFragment);
-                break;
-            case R.id.nav_cart:
-                navigationView.setCheckedItem(item.getItemId());
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.shoppingCartFragment);
-                break;
-            case R.id.nav_deals:
-                Toast.makeText(this, "Deals not implemented", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_orders:
-                Toast.makeText(this, "Orders not implemented", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_settings:
-                navigationView.setCheckedItem(item.getItemId());
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.settingsFragment);
-                break;
-            case R.id.nav_support:
-                Toast.makeText(this, "Support not implemented", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
+    public void onUserSelected(DialogFragment dialog, int userId) {
+        userRepository.setActiveUser(userId);
+    }
 
-
-        closeNavDrawer(GravityCompat.START);
-
-        return false;
+    // Navigation
+    @NonNull
+    @Override
+    public NavController getNavController() {
+        return Navigation.findNavController(this, R.id.nav_host_fragment);
     }
 }

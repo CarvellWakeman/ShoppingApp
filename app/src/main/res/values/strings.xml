@@ -12,13 +12,21 @@
     <string name="format_rating">%d%% Positive Reviews</string>
 
     <!-- Actions -->
+    <string name="action_cancel">Cancel</string>
+    <string name="action_switch">Switch</string>
     <string name="action_addToCart">Add To Cart</string>
     <string name="action_checkout">Proceed to Checkout</string>
-    <string name="action_inCart">Added!</string>
+    <string name="action_selectAccount">Click Here to select an account</string>
 
     <!-- Menus -->
     <string name="menu_home">Home</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
     <string name="menu_cart">Shopping Cart</string>
+    <string name="menu_select_user">Select User Account</string>
+    <string name="card_dev_tools">Development tools below!</string>
+
+    <!-- Status -->
+    <string name="status_inCart">Added!</string>
+    <string name="status_notLoggedIn">You are not logged in!</string>
 </resources>

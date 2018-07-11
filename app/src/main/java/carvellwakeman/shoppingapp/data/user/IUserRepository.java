@@ -15,4 +15,8 @@ public interface IUserRepository {
     void deleteUser(int userId);
 
     void deleteAllUsers();
+
+    LiveData<User> getActiveUser();
+
+    void setActiveUser(int userId);
 }

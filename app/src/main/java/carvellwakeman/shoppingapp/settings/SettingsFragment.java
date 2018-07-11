@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
@@ -28,8 +29,6 @@ import java.util.Random;
 
 public class SettingsFragment extends BaseFragment<SettingsViewModel> {
 
-    @BindView(R.id.selectUser)
-    ConstraintLayout buttonSelectUser;
     @BindView(R.id.buttonAddProducts) Button buttonAddProducts;
     @BindView(R.id.buttonAddUsers) Button buttonAddUsers;
     @BindView(R.id.buttonDeleteProducts) Button buttonDeleteProducts;
@@ -62,7 +61,6 @@ public class SettingsFragment extends BaseFragment<SettingsViewModel> {
             activity.setToolbarMenu(R.menu.empty_options, null);
             activity.setToolbarTitle(R.string.menu_settings);
         }
-
 
         // (TEMP) Add new product button
         class SimpleProduct {

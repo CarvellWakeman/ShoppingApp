@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/listFragment"
             android:icon="@drawable/home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_cart"
+            android:id="@id/shoppingCartFragment"
             android:icon="@drawable/cart"
             android:title="@string/menu_cart" />
         <item
@@ -23,7 +23,7 @@
             <menu>
                 <group android:checkableBehavior="single">
                     <item
-                        android:id="@+id/nav_settings"
+                        android:id="@+id/settingsFragment"
                         android:icon="@drawable/gear"
                         android:title="@string/menu_settings" />
                     <item
