@@ -32,8 +32,8 @@ public class RoomModule {
 
     @Provides
     @Singleton
-    IShoppingCartItemRepository provideShoppingCartItemRepository(IShoppingCartItemDao dao) {
-        return new ShoppingCartItemRepository(dao);
+    IShoppingCartItemRepository provideShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao) {
+        return new ShoppingCartItemRepository(productDao, shoppingCartItemDao);
     }
 
 

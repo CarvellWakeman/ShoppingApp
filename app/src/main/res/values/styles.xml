@@ -52,7 +52,7 @@
     <!-- Buttons -->
     <style name="ButtonColored" parent="Widget.AppCompat.Button.Colored">
         <item name="android:fontFamily">@font/product_sans_regular</item>
-        <item name="android:backgroundTint">@color/colorAccent</item>
+        <item name="android:background">@drawable/buttonstate</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>

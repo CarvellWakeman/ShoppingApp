@@ -34,4 +34,8 @@ public interface IProductDao {
     @Query("DELETE FROM Product")
     void deleteAllProducts();
 
+    // Change quantity
+    @Query("UPDATE Product SET quantity = quantity + :quantity WHERE id = :productId")
+    void addProductQuantity(int productId, int quantity);
+
 }

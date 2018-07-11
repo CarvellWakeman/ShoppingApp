@@ -16,10 +16,12 @@ import java.util.List;
 public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
 
     // Local Room Database
+    private final IProductDao productDao;
     private final IShoppingCartItemDao shoppingCartItemDao;
 
     @Inject
-    public ShoppingCartItemRepository(IShoppingCartItemDao shoppingCartItemDao) {
+    public ShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao) {
+        this.productDao = productDao;
         this.shoppingCartItemDao = shoppingCartItemDao;
     }
 
@@ -36,11 +38,13 @@ public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
     @Override
     public void createShoppingCartItem(ShoppingCartItem shoppingCartItem) {
         AsyncTask.execute(() -> shoppingCartItemDao.insertShoppingCartItem(shoppingCartItem));
+        AsyncTask.execute(() -> productDao.addProductQuantity(shoppingCartItem.getProductId(), -1));
     }
 
     @Override
     public void deleteShoppingCartItem(int productId) {
         AsyncTask.execute(() -> shoppingCartItemDao.deleteShoppingCartItem(productId));
+        AsyncTask.execute(() -> productDao.addProductQuantity(productId, 1));
     }
 
 }
