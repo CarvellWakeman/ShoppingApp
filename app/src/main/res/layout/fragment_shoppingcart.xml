@@ -22,7 +22,7 @@
             style="@style/ButtonColored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/burntOrange"
+            android:background="@drawable/buttonstate_checkout"
             android:elevation="4dp"
             android:text="@string/action_checkout"
             android:textSize="20sp"

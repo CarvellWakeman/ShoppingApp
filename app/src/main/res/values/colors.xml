@@ -14,6 +14,7 @@
     <color name="blueGreyDark">#37474f</color>
     <color name="lightForestGreen">#9ccc65</color>
     <color name="burntOrange">#ff9100</color>
+    <color name="burntOrangeDark">#c77800</color>
 
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="textColorSecondary">#757575</color>
