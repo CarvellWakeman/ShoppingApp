@@ -8,17 +8,22 @@ import android.view.ViewGroup;
 import carvellwakeman.shoppingapp.data.IBaseEntity;
 import carvellwakeman.shoppingapp.utils.DiffUtilCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public abstract class CustomBaseAdapter<T extends IBaseEntity, VH extends BaseViewHolder> extends RecyclerView.Adapter<VH> {
 
     protected int layout;
+
     protected final List<T> elements;
+    protected List<T> displayElements;
 
     public CustomBaseAdapter(List<T> elements, int layout) {
         this.elements = elements;
         this.layout = layout;
+
+        displayElements = new ArrayList<>(elements);
     }
 
     @NonNull
@@ -27,17 +32,17 @@ public abstract class CustomBaseAdapter<T extends IBaseEntity, VH extends BaseVi
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
-        holder.bind(elements.get(position));
+        holder.bind(displayElements.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return elements.size();
+        return displayElements.size();
     }
 
     @Override
     public long getItemId(int position) {
-        return elements.get(position).getId();
+        return displayElements.get(position).getId();
     }
 
     public void updateElements(List<T> newList) {
@@ -45,6 +50,7 @@ public abstract class CustomBaseAdapter<T extends IBaseEntity, VH extends BaseVi
 
         elements.clear();
         elements.addAll(newList);
+        displayElements = new ArrayList<>(elements);
 
         diffResult.dispatchUpdatesTo(this);
     }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="carvellwakeman.shoppingapp.data.product.Product" />
@@ -55,7 +54,7 @@
 
                 <TextView
                     android:id="@+id/textView_Name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="8dp"
@@ -72,7 +71,7 @@
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="92dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="16dp"
                     android:max="100"
                     android:progress="@{item.rating}"
                     android:progressTint="@color/burntOrange"
@@ -94,7 +93,7 @@
                     android:id="@+id/textView_Description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:text="@{item.description}"
                     android:textAppearance="@style/Text.Secondary"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -119,10 +118,12 @@
                     style="@style/ButtonColored"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
                     android:elevation="4dp"
                     android:text="@string/action_addToCart"
                     android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_weight"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView_Description"
@@ -143,12 +144,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="16dp"
                     android:text="@{@string/format_weight(item.weight)}"
                     android:textAppearance="@style/Text.Secondary.Italic"
                     app:layout_constraintBottom_toTopOf="@+id/textView_lengthWidthHeight"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/button_addToCart"
                     tools:text="Weight" />
 
 

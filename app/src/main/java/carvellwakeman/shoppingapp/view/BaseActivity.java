@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -94,9 +95,16 @@ public class BaseActivity extends AppCompatActivity implements NavHost, SelectUs
                 userEmail.setText(user.getEmail());
             }
         });
+
+        // Nav drawer was being opened on startup by NavigationUI
+        closeNavDrawer(GravityCompat.START);
     }
 
     // Toolbar
+    public Menu getToolbarMenu() {
+        return toolbar.getMenu();
+    }
+
     public void setToolbarNav(int icon, View.OnClickListener action) {
         toolbar.setNavigationIcon(icon);
         toolbar.setNavigationOnClickListener(action);

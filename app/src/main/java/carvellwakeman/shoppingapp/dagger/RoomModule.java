@@ -4,6 +4,9 @@ package carvellwakeman.shoppingapp.dagger;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 import carvellwakeman.shoppingapp.data.*;
+import carvellwakeman.shoppingapp.data.order.IProductOrderDao;
+import carvellwakeman.shoppingapp.data.order.IProductOrderRepository;
+import carvellwakeman.shoppingapp.data.order.ProductOrderRepository;
 import carvellwakeman.shoppingapp.data.product.IProductDao;
 import carvellwakeman.shoppingapp.data.product.IProductRepository;
 import carvellwakeman.shoppingapp.data.product.ProductRepository;
@@ -41,8 +44,8 @@ public class RoomModule {
 
     @Provides
     @Singleton
-    IShoppingCartItemRepository provideShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao) {
-        return new ShoppingCartItemRepository(productDao, shoppingCartItemDao);
+    IShoppingCartItemRepository provideShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao, IProductOrderDao orderDao) {
+        return new ShoppingCartItemRepository(productDao, shoppingCartItemDao, orderDao);
     }
 
     @Provides
@@ -50,6 +53,10 @@ public class RoomModule {
     IUserRepository provideUserRepository(IUserDao userDao) {
         return new UserRepository(userDao);
     }
+
+    @Provides
+    @Singleton
+    IProductOrderRepository provideOrderRepository(IProductOrderDao orderDao) { return new ProductOrderRepository(orderDao); }
 
 
     // DAOs
@@ -68,6 +75,11 @@ public class RoomModule {
     @Provides
     @Singleton
     IUserDao provideUserDao() { return database.userDao(); }
+
+    @Provides
+    @Singleton
+    IProductOrderDao provideOrderDao() { return database.orderDao(); }
+
 
     // Database
     @Provides

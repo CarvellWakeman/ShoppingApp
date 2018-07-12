@@ -15,9 +15,9 @@
             android:title="Special Deals" />
 
         <item
-            android:id="@+id/nav_orders"
+            android:id="@+id/ordersFragment"
             android:icon="@drawable/order"
-            android:title="Your Orders" />
+            android:title="@string/menu_orders" />
 
         <item android:title="@string/menu_settings">
             <menu>

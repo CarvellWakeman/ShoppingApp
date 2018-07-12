@@ -3,6 +3,8 @@ package carvellwakeman.shoppingapp.data;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
+import carvellwakeman.shoppingapp.data.order.IProductOrderDao;
+import carvellwakeman.shoppingapp.data.order.ProductOrder;
 import carvellwakeman.shoppingapp.data.product.IProductDao;
 import carvellwakeman.shoppingapp.data.product.Product;
 import carvellwakeman.shoppingapp.data.shoppingcartitem.IShoppingCartItemDao;
@@ -16,12 +18,13 @@ import carvellwakeman.shoppingapp.data.user.User;
  * This is an extension of a Room database object.
  * It specifies the tables (entities) which will be created in the database.
  */
-@Database(entities = {Product.class, ShoppingCartItem.class, User.class, ActiveUser.class}, exportSchema = false, version = 11)
+@Database(entities = {Product.class, ShoppingCartItem.class, User.class, ActiveUser.class, ProductOrder.class}, exportSchema = false, version = 12)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
     public abstract IProductDao productDao();
     public abstract IShoppingCartItemDao shoppingCartItemDao();
     public abstract IUserDao userDao();
+    public abstract IProductOrderDao orderDao();
 
 
 //    public static MigrationContainer migrations;

@@ -4,16 +4,9 @@ package carvellwakeman.shoppingapp.listproducts;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.widget.*;
+import android.view.*;
 import android.widget.Toast;
-import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.R;
@@ -26,7 +19,6 @@ import carvellwakeman.shoppingapp.viewmodel.ListProductsViewModel;
 public class ListFragment extends BaseFragment<ListProductsViewModel> {
 
     @BindView(R.id.rec_products) RecyclerView recyclerView;
-
 
     // Required empty public constructor
     public ListFragment() {}
@@ -55,9 +47,6 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
             activity.setToolbarNav(R.drawable.menu, (View v) -> activity.openNavDrawer(GravityCompat.START));
             activity.setToolbarMenu(R.menu.fragment_list_options, (MenuItem item) -> {
                 switch (item.getItemId()) {
-                    case R.id.action_search:
-                        Toast.makeText(getContext(), "Search not implemented", Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.action_cart:
                         activity.getNavController().navigate(R.id.shoppingCartFragment);
                         break;
@@ -67,6 +56,31 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
                 return true;
             });
             activity.setToolbarTitle(R.string.app_name);
+
+            // Searching through products
+            MenuItem mSearch = activity.getToolbarMenu().findItem(R.id.action_search);
+            SearchView mSearchView = (SearchView) mSearch.getActionView();
+
+            mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) { return false; }
+
+                @Override public boolean onQueryTextChange(String newText) {
+                    ProductAdapter adapter = (ProductAdapter) recyclerView.getAdapter();
+                    if (adapter != null) {
+                        if (newText.isEmpty()) {
+                            adapter.resetElements();
+                            mSearchView.clearFocus();
+                            mSearchView.setIconified(true);
+                        } else {
+                            adapter.filter(newText);
+                        }
+
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         // RecyclerView boilerplate

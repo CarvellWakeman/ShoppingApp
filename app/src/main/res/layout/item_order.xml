@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="item"
             type="carvellwakeman.shoppingapp.data.product.Product" />
     </data>
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="?attr/selectableItemBackground"
+        android:background="@color/white"
         android:padding="4dp">
 
         <TextView
@@ -28,7 +28,6 @@
             android:textAppearance="@style/Text.Secondary.Italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_image"
             tools:text="Id" />
 
         <TextView
@@ -53,7 +52,9 @@
             android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:contentDescription="@{item.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Image" />
@@ -73,8 +74,8 @@
             android:id="@+id/textView_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:text="@{item.name}"
             android:textAppearance="@style/Text"
             app:layout_constraintEnd_toStartOf="@+id/textView_cost"

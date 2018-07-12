@@ -22,6 +22,9 @@ public interface IShoppingCartItemDao {
     @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id WHERE s.userId IN (SELECT userId FROM ActiveUser LIMIT 1)")
     LiveData<List<Product>> getShoppingCartProducts();
 
+    @Query("SELECT p.* FROM Product p INNER JOIN ShoppingCartItem s on s.productId = p.id WHERE s.userId IN (SELECT userId FROM ActiveUser LIMIT 1)")
+    List<Product> getShoppingCartProductsSync();
+
     // Has Item
     @Query("SELECT EXISTS(SELECT 1 FROM ShoppingCartItem s WHERE s.productId = :productId AND s.userId IN (SELECT userId FROM ActiveUser LIMIT 1) LIMIT 1)")
     LiveData<Boolean> shoppingCartHasProduct(int productId);
@@ -33,5 +36,9 @@ public interface IShoppingCartItemDao {
     // Delete Item
     @Query("DELETE FROM ShoppingCartItem WHERE productId = :productId")
     void deleteShoppingCartItem(int productId);
+
+    // Delete All Items
+    @Query("DELETE FROM ShoppingCartItem WHERE userId IN (SELECT userId FROM ActiveUser LIMIT 1)")
+    void deleteUserItems();
 
 }

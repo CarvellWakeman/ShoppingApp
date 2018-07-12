@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_listFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -46,4 +49,9 @@
         android:name="carvellwakeman.shoppingapp.shoppingcart.ShoppingCartFragment"
         android:label="fragment_shoppingcart"
         tools:layout="@layout/fragment_shoppingcart" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="carvellwakeman.shoppingapp.orders.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
 </navigation>

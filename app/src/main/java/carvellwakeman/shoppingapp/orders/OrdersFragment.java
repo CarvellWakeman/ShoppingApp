@@ -1,4 +1,4 @@
-package carvellwakeman.shoppingapp.shoppingcart;
+package carvellwakeman.shoppingapp.orders;
 
 
 import android.databinding.DataBindingUtil;
@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.BR;
@@ -24,25 +23,24 @@ import carvellwakeman.shoppingapp.utils.SwipeDeleteCallback;
 import carvellwakeman.shoppingapp.view.BaseActivity;
 import carvellwakeman.shoppingapp.view.BaseFragment;
 import carvellwakeman.shoppingapp.view.CustomBaseAdapter;
+import carvellwakeman.shoppingapp.viewmodel.OrdersViewModel;
 import carvellwakeman.shoppingapp.viewmodel.ShoppingCartViewModel;
 
 
-public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
+public class OrdersFragment extends BaseFragment<OrdersViewModel> {
 
     @BindView(R.id.rec_products)
     RecyclerView recyclerView;
-    @BindView(R.id.button_checkout)
-    Button buttonCheckout;
 
     // Required empty public constructor
-    public ShoppingCartFragment() {}
+    public OrdersFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Dagger 2 injection
-        ((ShoppingApplication) getActivity().getApplication()).getApplicationComponent().inject(ShoppingCartFragment.this);
+        ((ShoppingApplication) getActivity().getApplication()).getApplicationComponent().inject(OrdersFragment.this);
     }
 
     @Override
@@ -50,7 +48,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
         super.createViewModel();
 
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_shoppingcart, container, false);
+        ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_orders, container, false);
         binding.setLifecycleOwner(this);
         ButterKnife.bind(this, binding.getRoot());
 
@@ -63,7 +61,7 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
             // Toolbar
             activity.setToolbarNav(R.drawable.arrow_left, (View v) -> activity.getNavController().navigateUp());
             activity.setToolbarMenu(R.menu.empty_options, null);
-            activity.setToolbarTitle(R.string.menu_cart);
+            activity.setToolbarTitle(R.string.menu_orders);
 
             // RecyclerView boilerplate
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -72,37 +70,16 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
 
             // Subscribe recyclerview adapter to viewModel LiveData
             viewModel.getProducts().observe(this, products -> {
-                viewModel.calculateSubTotal(products);
+                if (products != null) {
+                    binding.setVariable(BR.productsCount, products.size());
 
-                if (recyclerView.getAdapter() == null) {
-                    recyclerView.setAdapter(new ShoppingCartItemAdapter(products, R.layout.item_shopping_cart_product));
-                }
-                else {
-                    ((ShoppingCartItemAdapter) recyclerView.getAdapter()).updateElements(products);
-                }
-            });
-
-            // Recyclerview Swipe to delete
-            SwipeDeleteCallback sdcb = new SwipeDeleteCallback(getActivity(), ItemTouchHelper.LEFT) {
-                @Override
-                public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                    RecyclerView.Adapter adapter = recyclerView.getAdapter();
-                    if (adapter instanceof CustomBaseAdapter) {
-                        CustomBaseAdapter customAdapter = (CustomBaseAdapter) adapter;
-                        viewModel.removeProduct((int) customAdapter.getItemId(viewHolder.getAdapterPosition()));
+                    if (recyclerView.getAdapter() == null) {
+                        recyclerView.setAdapter(new OrdersAdapter(products, R.layout.item_order));
+                    }
+                    else {
+                        ((OrdersAdapter) recyclerView.getAdapter()).updateElements(products);
                     }
                 }
-            };
-
-            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(sdcb);
-            itemTouchHelper.attachToRecyclerView(recyclerView);
-
-            // Checkout
-            viewModel.getActiveUser().observe(this, user -> {
-                buttonCheckout.setOnClickListener((View v) -> {
-                    buttonCheckout.setEnabled(false);
-                    viewModel.purchaseProducts(user.getId());
-                });
             });
         }
 

@@ -3,6 +3,9 @@ package carvellwakeman.shoppingapp.data.shoppingcartitem;
 
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
+import carvellwakeman.shoppingapp.data.order.IProductOrderDao;
+import carvellwakeman.shoppingapp.data.order.ProductOrder;
 import carvellwakeman.shoppingapp.data.product.IProductDao;
 import carvellwakeman.shoppingapp.data.product.Product;
 
@@ -20,11 +23,13 @@ public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
     // Local Room Database
     private final IProductDao productDao;
     private final IShoppingCartItemDao shoppingCartItemDao;
+    private final IProductOrderDao orderDao;
 
     @Inject
-    public ShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao) {
+    public ShoppingCartItemRepository(IProductDao productDao, IShoppingCartItemDao shoppingCartItemDao, IProductOrderDao orderDao) {
         this.productDao = productDao;
         this.shoppingCartItemDao = shoppingCartItemDao;
+        this.orderDao = orderDao;
     }
 
     @Override
@@ -49,4 +54,16 @@ public class ShoppingCartItemRepository implements IShoppingCartItemRepository {
         AsyncTask.execute(() -> productDao.addProductQuantity(productId, 1));
     }
 
+    @Override
+    public void purchaseProducts(int userId) {
+        AsyncTask.execute(() -> {
+            List<Product> products = shoppingCartItemDao.getShoppingCartProductsSync();
+
+            for (Product p : products) {
+                orderDao.insertOrder(new ProductOrder(userId, p.getId(), System.currentTimeMillis()));
+            }
+
+            shoppingCartItemDao.deleteUserItems();
+        });
+    }
 }

@@ -11,6 +11,22 @@
         <item name="android:windowBackground">@color/windowBackground</item>
 
         <item name="android:textAppearance">@style/Text</item>
+
+        <item name="searchViewStyle">@style/CustomSearchViewStyle</item>
+        <item name="autoCompleteTextViewStyle">@style/Widget.MyApp.AutoCompleteTextView.SearchView</item>
+    </style>
+
+
+    <!-- Search View -->
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/search</item>
+        <item name="closeIcon">@drawable/close</item>
+        <item name="android:hint">@string/action_search</item>
+    </style>
+
+    <style name="Widget.MyApp.AutoCompleteTextView.SearchView" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 
 

@@ -1,6 +1,7 @@
 package carvellwakeman.shoppingapp.data.shoppingcartitem;
 
 import android.arch.lifecycle.LiveData;
+import android.content.Context;
 import carvellwakeman.shoppingapp.data.product.Product;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface IShoppingCartItemRepository {
     void createShoppingCartItem(ShoppingCartItem item);
 
     void deleteShoppingCartItem(int productId);
+
+    void purchaseProducts(int userId);
 
 }

@@ -3,12 +3,7 @@ package carvellwakeman.shoppingapp.view;
 
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ImageView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.BR;
-import carvellwakeman.shoppingapp.R;
 
 
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder{

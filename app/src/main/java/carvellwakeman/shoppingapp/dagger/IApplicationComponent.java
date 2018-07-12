@@ -3,6 +3,7 @@ package carvellwakeman.shoppingapp.dagger;
 
 import carvellwakeman.shoppingapp.detailproduct.DetailFragment;
 import carvellwakeman.shoppingapp.listproducts.ListFragment;
+import carvellwakeman.shoppingapp.orders.OrdersFragment;
 import carvellwakeman.shoppingapp.settings.SettingsFragment;
 import carvellwakeman.shoppingapp.shoppingcart.ShoppingCartFragment;
 import carvellwakeman.shoppingapp.view.BaseActivity;
@@ -20,5 +21,6 @@ public interface IApplicationComponent {
     void inject(DetailFragment fragment);
     void inject(SettingsFragment fragment);
     void inject(ShoppingCartFragment fragment);
+    void inject(OrdersFragment fragment);
 
 }
