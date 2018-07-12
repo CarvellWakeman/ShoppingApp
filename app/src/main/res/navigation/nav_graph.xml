@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_listFragment_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_supportDialogFragment"
+            app:destination="@id/supportDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -54,4 +57,9 @@
         android:name="carvellwakeman.shoppingapp.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/supportDialogFragment"
+        android:name="carvellwakeman.shoppingapp.support.SupportDialogFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" />
 </navigation>

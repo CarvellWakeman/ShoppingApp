@@ -26,6 +26,7 @@ import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.data.user.IUserRepository;
 import carvellwakeman.shoppingapp.data.user.User;
 import carvellwakeman.shoppingapp.selectuser.SelectUserDialogFragment;
+import carvellwakeman.shoppingapp.support.SupportDialogFragment;
 import com.bumptech.glide.Glide;
 
 import javax.inject.Inject;
@@ -150,4 +151,5 @@ public class BaseActivity extends AppCompatActivity implements NavHost, SelectUs
     public NavController getNavController() {
         return Navigation.findNavController(this, R.id.nav_host_fragment);
     }
+
 }

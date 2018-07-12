@@ -12,6 +12,7 @@
 
     <color name="white">#FFF</color>
     <color name="black">#000</color>
+    <color name="googleButtonBlue">#2196F3</color>
     <color name="blueGreyDark">#37474f</color>
     <color name="lightForestGreen">#9ccc65</color>
     <color name="burntOrange">#ff9100</color>

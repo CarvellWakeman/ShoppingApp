@@ -60,6 +60,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_listFragment_to_supportDialogFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -96,6 +101,18 @@
                           <Point>
                             <option name="x" value="236" />
                             <option name="y" value="21" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="supportDialogFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-478" />
+                            <option name="y" value="433" />
                           </Point>
                         </option>
                       </LayoutPositions>

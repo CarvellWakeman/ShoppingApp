@@ -21,12 +21,13 @@
     <string name="action_checkout">Purchase Items</string>
     <string name="action_selectAccount">Click Here to select an account</string>
     <string name="action_search">Search</string>
+    <string name="action_okay">Okay</string>
 
     <!-- Menus -->
     <string name="menu_home">Home</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_deals">Special Deals</string>
-    <string name="menu_help_support">Help and Support</string>
+    <string name="menu_about">About Me</string>
     <string name="menu_search">Search</string>
     <string name="menu_cart">Shopping Cart</string>
     <string name="menu_orders">Your Orders</string>
@@ -38,4 +39,20 @@
     <string name="status_cartEmpty">Shopping Cart is Empty</string>
     <string name="status_notLoggedIn">You are not logged in!</string>
     <string name="status_noOrders">You have not placed any orders yet!</string>
+
+    <!-- External links -->
+    <string name="exter_github">CarvellWakeman on GitHub</string>
+    <string name="link_github">https://github.com/CarvellWakeman</string>
+    <string name="exter_linkedin">Zach Lerew on LinkedIn</string>
+    <string name="link_linkedin">https://www.linkedin.com/in/zach-lerew</string>
+    <string name="exter_mysite">My Website</string>
+    <string name="link_mysite">http://www.carvellwakeman.ddns.net</string>
+
+    <!-- Support message -->
+    <string name="pitch_myself">My name is Zach Lerew.
+        \n\nI am a developer with a passion for making applications both stylish and functional.
+        \n\nI have over a year of experience as a developer for OSU CASS, where I designed and implemented software used state-wide.
+        \n\nAt university I specialized in application development and computer graphics, and in my free time I love to build software and tinker with everything I can.
+        \n\nCheck out some of my other work!</string>
+
 </resources>
