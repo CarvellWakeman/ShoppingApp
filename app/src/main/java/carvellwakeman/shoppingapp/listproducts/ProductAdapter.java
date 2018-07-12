@@ -27,7 +27,7 @@ public class ProductAdapter extends CustomBaseAdapter<Product, ProductViewHolder
         return new ProductViewHolder(binding);
     }
 
-    public void filter(String query) {
+    void filter(String query) {
         displayElements.clear();
         notifyItemRangeRemoved(0, elements.size());
 
@@ -43,7 +43,7 @@ public class ProductAdapter extends CustomBaseAdapter<Product, ProductViewHolder
         }
     }
 
-    public void resetElements(){
+    void resetElements(){
         displayElements.clear();
         displayElements.addAll(elements);
         //notifyItemRangeInserted(0, elements.size()-1);

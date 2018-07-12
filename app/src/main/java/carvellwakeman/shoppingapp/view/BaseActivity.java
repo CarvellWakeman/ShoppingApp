@@ -71,7 +71,7 @@ public class BaseActivity extends AppCompatActivity implements NavHost, SelectUs
         userEmail = navigationHeader.findViewById(R.id.userEmail);
 
         // Switch user
-        userRepository.getUsers().observe(this, users -> {
+        userRepository.getUsers().observe(this, users ->
             buttonSelectUser.setOnClickListener((View v) -> {
                 // Get emails from list of users
                 // Java 8 streams would be great here, but not supported on API < 24
@@ -84,8 +84,8 @@ public class BaseActivity extends AppCompatActivity implements NavHost, SelectUs
                 }
 
                 dialog.show(getFragmentManager(), "selectUser");
-            });
-        });
+            })
+        );
 
         // Navigation drawer active user
         userRepository.getActiveUser().observe(this, user -> {

@@ -19,7 +19,7 @@ public class OrdersViewHolder extends BaseViewHolder<Product> implements View.On
     @BindView(R.id.imageView_image) ImageView imageView;
     private Product product;
 
-    public OrdersViewHolder(ViewDataBinding binding) {
+    OrdersViewHolder(ViewDataBinding binding) {
         super(binding);
         ButterKnife.bind(this, binding.getRoot());
 

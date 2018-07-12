@@ -34,7 +34,6 @@ public class ProductOrder implements IBaseEntity {
     private int id;
     private int productId;
     private int userId;
-    @NonNull
     private long date;
 
     public ProductOrder(int userId, int productId, long date) {

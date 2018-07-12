@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import carvellwakeman.shoppingapp.BR;
@@ -99,10 +98,12 @@ public class ShoppingCartFragment extends BaseFragment<ShoppingCartViewModel> {
 
             // Checkout
             viewModel.getActiveUser().observe(this, user -> {
-                buttonCheckout.setOnClickListener((View v) -> {
-                    buttonCheckout.setEnabled(false);
-                    viewModel.purchaseProducts(user.getId());
-                });
+                if (user != null) {
+                    buttonCheckout.setOnClickListener((View v) -> {
+                        buttonCheckout.setEnabled(false);
+                        viewModel.purchaseProducts(user.getId());
+                    });
+                }
             });
         }
 

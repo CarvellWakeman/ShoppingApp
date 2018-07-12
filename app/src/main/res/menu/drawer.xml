@@ -12,7 +12,7 @@
         <item
             android:id="@+id/nav_deals"
             android:icon="@drawable/alert"
-            android:title="Special Deals" />
+            android:title="@string/menu_deals" />
 
         <item
             android:id="@+id/ordersFragment"
@@ -29,7 +29,7 @@
                     <item
                         android:id="@+id/nav_support"
                         android:icon="@drawable/forum"
-                        android:title="Help and Support" />
+                        android:title="@string/menu_help_support" />
                 </group>
             </menu>
         </item>

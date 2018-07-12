@@ -40,6 +40,7 @@
                 android:gravity="end"
                 android:paddingTop="8dp"
                 android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:text="@{@string/format_subtotal(carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, viewModel.getSubTotalCost()))}"
                 android:textAppearance="@style/Text.Secondary"
                 android:textColor="@color/black"
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:text="@{@string/format_tax(carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, viewModel.tax))}"
                 android:textAppearance="@style/Text.Secondary"
                 tools:text="+Tax" />
@@ -61,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 android:paddingBottom="8dp"
                 android:text="@{@string/format_total(carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, viewModel.tax + viewModel.subTotalCost))}"
                 android:textAppearance="@style/Text"

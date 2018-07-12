@@ -18,8 +18,7 @@ public class OrdersViewModel extends ViewModel {
 
     private final IProductOrderRepository orderRepository;
 
-    LiveData<List<Product>> products;
-    int productsCount;
+    private LiveData<List<Product>> products;
 
     @Inject
     public OrdersViewModel(IProductOrderRepository orderRepository) {
@@ -30,13 +29,6 @@ public class OrdersViewModel extends ViewModel {
 
     public LiveData<List<Product>> getProducts() {
         return products;
-    }
-
-    public int getProductsCount() {
-        return productsCount;
-    }
-    public void setProductsCount(int productsCount) {
-        this.productsCount = productsCount;
     }
 
 }

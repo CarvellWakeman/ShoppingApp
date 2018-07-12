@@ -14,9 +14,9 @@ import javax.inject.Singleton;
 
 
 @Module
-public class ViewModelModule {
+class ViewModelModule {
 
-    public ViewModelModule() {}
+    ViewModelModule() {}
 
     // View Model Factory
     @Provides
