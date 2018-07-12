@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="hasLoggedInUser"
+            type="Boolean"/>
+        <variable
             name="item"
             type="carvellwakeman.shoppingapp.data.product.Product" />
     </data>
@@ -53,6 +56,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/textView_Cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, item.cost)}"
+                    android:textAppearance="@style/Text.Italic.Bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView_Name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Cost" />
+
+                <TextView
                     android:id="@+id/textView_Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -82,8 +96,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:textAppearance="@style/Text.Secondary.Small"
                     android:text="@{@string/format_rating(item.rating)}"
+                    android:textAppearance="@style/Text.Secondary.Small"
                     app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                     app:layout_constraintStart_toEndOf="@+id/progressBar"
                     app:layout_constraintTop_toTopOf="@+id/progressBar"
@@ -101,33 +115,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/progressBar"
                     tools:text="Description" />
-
-                <TextView
-                    android:id="@+id/textView_Cost"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="@{carvellwakeman.shoppingapp.utils.StringFormat.currency(@string/format_currency, item.cost)}"
-                    android:textAppearance="@style/Text.Italic.Bold"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView_Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Cost" />
-
-                <Button
-                    android:id="@+id/button_addToCart"
-                    style="@style/ButtonColored"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
-                    android:elevation="4dp"
-                    android:text="@string/action_addToCart"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_weight"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_Description"
-                    tools:text="@string/action_addToCart" />
 
                 <TextView
                     android:id="@+id/textView_lengthWidthHeight"
@@ -149,6 +136,23 @@
                     app:layout_constraintBottom_toTopOf="@+id/textView_lengthWidthHeight"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Weight" />
+
+                <Button
+                    android:id="@+id/button_addToCart"
+                    style="@style/ButtonColored"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="32dp"
+                    android:elevation="4dp"
+                    android:enabled="@{hasLoggedInUser}"
+                    android:text="@{hasLoggedInUser ? @string/action_addToCart : @string/status_notLoggedIn}"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_weight"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_Description"
+                    tools:text="@string/action_addToCart" />
 
 
             </android.support.constraint.ConstraintLayout>

@@ -45,6 +45,9 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
         ViewDataBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_details, container, false);
         ButterKnife.bind(this, binding.getRoot());
 
+        // Data binding
+        binding.setVariable(BR.viewModel, viewModel);
+
         // Toolbar
         BaseActivity activity = (BaseActivity) getActivity();
 
@@ -87,6 +90,8 @@ public class DetailFragment extends BaseFragment<DetailProductViewModel> {
 
             // Add to cart button
             viewModel.getActiveUser().observe(this, user -> {
+                binding.setVariable(BR.hasLoggedInUser, user != null);
+
                 if (user != null) {
                     buttonAddToCart.setOnClickListener( (View v) -> {
                         viewModel.addShoppingCartItem(user.getId(), productId);

@@ -19,4 +19,6 @@ public interface IUserRepository {
     LiveData<User> getActiveUser();
 
     void setActiveUser(int userId);
+
+    LiveData<Boolean> hasActiveUser();
 }

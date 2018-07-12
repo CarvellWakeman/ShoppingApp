@@ -10,11 +10,6 @@
             android:icon="@drawable/cart"
             android:title="@string/menu_cart" />
         <item
-            android:id="@+id/nav_deals"
-            android:icon="@drawable/alert"
-            android:title="@string/menu_deals" />
-
-        <item
             android:id="@+id/ordersFragment"
             android:icon="@drawable/order"
             android:title="@string/menu_orders" />

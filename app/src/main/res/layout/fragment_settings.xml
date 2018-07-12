@@ -31,64 +31,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/buttonAddProducts"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:elevation="8dp"
-                    android:text="Add Products"
-                    android:textAppearance="@style/Text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonAddUsers" />
-
-                <Button
-                    android:id="@+id/buttonAddUsers"
+                    android:id="@+id/buttonReset"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="64dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@android:color/holo_red_dark"
                     android:elevation="8dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="8dp"
-                    android:text="Add Users"
+                    android:text="Reset Data"
                     android:textAppearance="@style/Text"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
-                <Button
-                    android:id="@+id/buttonDeleteProducts"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="@android:color/holo_red_dark"
-                    android:elevation="8dp"
-                    android:text="Delete All Products"
-                    android:textAppearance="@style/Text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonDeleteUsers" />
-
-                <Button
-                    android:id="@+id/buttonDeleteUsers"
-                    style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@android:color/holo_red_dark"
-                    android:elevation="8dp"
-                    android:text="Delete All Users"
-                    android:textAppearance="@style/Text"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             </android.support.constraint.ConstraintLayout>

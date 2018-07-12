@@ -18,7 +18,7 @@ import carvellwakeman.shoppingapp.data.product.Product;
 @Entity(foreignKeys = {
                 @ForeignKey(entity = User.class,
                         parentColumns = "id",
-                        childColumns = "id",
+                        childColumns = "userId",
                         onDelete = ForeignKey.CASCADE)
         }, indices = {@Index("userId")})
 public class ActiveUser implements IBaseEntity {

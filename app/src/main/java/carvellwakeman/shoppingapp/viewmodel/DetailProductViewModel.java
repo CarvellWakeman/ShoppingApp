@@ -41,4 +41,6 @@ public class DetailProductViewModel extends ViewModel {
 
     public LiveData<User> getActiveUser() { return userRepository.getActiveUser(); }
 
+    public LiveData<Boolean> hasLoggedInUser() { return userRepository.hasActiveUser(); }
+
 }

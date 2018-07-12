@@ -94,6 +94,10 @@ public class BaseActivity extends AppCompatActivity implements NavHost, SelectUs
                 Glide.with(this).load(user.getImageUrl()).into(userImage);
                 userName.setText(user.getName());
                 userEmail.setText(user.getEmail());
+            } else {
+                userImage.setImageDrawable(null);
+                userName.setText(R.string.status_notLoggedIn);
+                userEmail.setText(R.string.action_selectAccount);
             }
         });
 

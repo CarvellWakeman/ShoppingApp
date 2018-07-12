@@ -62,6 +62,7 @@ public class ListFragment extends BaseFragment<ListProductsViewModel> {
             // Searching through products
             MenuItem mSearch = activity.getToolbarMenu().findItem(R.id.action_search);
             SearchView mSearchView = (SearchView) mSearch.getActionView();
+            mSearchView.setQueryHint(getString(R.string.action_search));
 
             mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override

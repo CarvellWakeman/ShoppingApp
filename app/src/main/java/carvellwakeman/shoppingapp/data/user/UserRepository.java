@@ -48,7 +48,12 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public void deleteAllUsers() { AsyncTask.execute(() -> userDao.deleteAllUsers()); }
+    public void deleteAllUsers() {
+        AsyncTask.execute(() -> {
+            userDao.deleteActiveUser();
+            userDao.deleteAllUsers();
+        });
+    }
 
     @Override
     public LiveData<User> getActiveUser() {
@@ -60,4 +65,8 @@ public class UserRepository implements IUserRepository {
         AsyncTask.execute(() -> userDao.setActiveUser(new ActiveUser(userId)));
     }
 
+    @Override
+    public LiveData<Boolean> hasActiveUser() {
+        return userDao.hasActiveUser();
+    }
 }

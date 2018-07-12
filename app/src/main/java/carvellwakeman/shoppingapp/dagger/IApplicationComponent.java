@@ -1,6 +1,7 @@
 package carvellwakeman.shoppingapp.dagger;
 
 
+import carvellwakeman.shoppingapp.ShoppingApplication;
 import carvellwakeman.shoppingapp.detailproduct.DetailFragment;
 import carvellwakeman.shoppingapp.listproducts.ListFragment;
 import carvellwakeman.shoppingapp.orders.OrdersFragment;
@@ -15,6 +16,8 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {RoomModule.class, ViewModelModule.class})
 public interface IApplicationComponent {
+
+    void inject(ShoppingApplication application);
 
     void inject(BaseActivity activity);
     void inject(ListFragment fragment);

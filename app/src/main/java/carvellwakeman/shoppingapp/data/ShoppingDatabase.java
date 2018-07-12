@@ -18,7 +18,7 @@ import carvellwakeman.shoppingapp.data.user.User;
  * This is an extension of a Room database object.
  * It specifies the tables (entities) which will be created in the database.
  */
-@Database(entities = {Product.class, ShoppingCartItem.class, User.class, ActiveUser.class, ProductOrder.class}, exportSchema = false, version = 12)
+@Database(entities = {Product.class, ShoppingCartItem.class, User.class, ActiveUser.class, ProductOrder.class}, exportSchema = false, version = 13)
 public abstract class ShoppingDatabase extends RoomDatabase {
 
     public abstract IProductDao productDao();
